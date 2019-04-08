@@ -64,6 +64,7 @@ import { triggerWindowResizeEvent } from '@/utils/util'
 import { mapState, mapActions } from 'vuex'
 import { mixin, mixinDevice } from '@/utils/mixin'
 import config from '@/config/defaultSettings'
+import { asyncRouterMap } from '@/config/router.config.js'
 
 import RouteView from './RouteView'
 import MultiTab from '@/components/MultiTab'
@@ -111,7 +112,8 @@ export default {
     }
   },
   created () {
-    this.menus = this.mainMenu.find(item => item.path === '/').children
+    // this.menus = this.mainMenu.find(item => item.path === '/').children
+    this.menus = asyncRouterMap.find((item) => item.path === '/').children
     this.collapsed = !this.sidebarOpened
   },
   mounted () {

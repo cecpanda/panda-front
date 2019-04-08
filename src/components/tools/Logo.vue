@@ -1,6 +1,6 @@
 <template>
   <div class="logo">
-    <router-link :to="{name:'dashboard'}">
+    <router-link :to="{name: 'home'}">
       <LogoSvg alt="logo" />
       <h1 v-if="showTitle">{{ title }}</h1>
     </router-link>
@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import LogoSvg from '@/assets/logo.svg?inline'
+import LogoSvg from '@/assets/panda.svg?inline'
 
 export default {
   name: 'Logo',
@@ -18,7 +18,7 @@ export default {
   props: {
     title: {
       type: String,
-      default: 'Ant Design Pro',
+      default: 'Panda Titan',
       required: false
     },
     showTitle: {

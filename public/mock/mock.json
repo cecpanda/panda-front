@@ -1,0 +1,17 @@
+{
+  "result":
+  {
+    "token": "1111111111111111111111111111",
+    "captcha": "9527",
+    "user": {
+      "username": "duncan",
+      "realname": "邓肯",
+      "avatar": "http://127.0.0.1:8080/avatar2.jpg"
+    },
+    "role": {
+      "permissions": ["a"]
+    },
+    "name": "admin",
+    "avatar": "/panda.jpeg"
+  }
+}

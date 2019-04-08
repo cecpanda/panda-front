@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { login, getInfo, logout } from '@/api/login'
+import { login, getInfo, getInfo2, logout } from '@/api/login'
 import { ACCESS_TOKEN } from '@/store/mutation-types'
 import { welcome } from '@/utils/util'
 
@@ -17,8 +17,14 @@ const user = {
     SET_TOKEN: (state, token) => {
       state.token = token
     },
-    SET_NAME: (state, { name, welcome }) => {
-      state.name = name
+    // SET_NAME: (state, { name, welcome }) => {
+    //   state.name = name
+    //   state.welcome = welcome
+    // },
+    SET_NAME: (state, { username, realname, avatar, welcome }) => {
+      state.username = username
+      state.realname = realname
+      state.avatar = avatar
       state.welcome = welcome
     },
     SET_AVATAR: (state, avatar) => {
@@ -44,6 +50,26 @@ const user = {
         }).catch(error => {
           reject(error)
         })
+      })
+    },
+
+    GetInfo2 ({ commit }) {
+      return new Promise((resolve, reject) => {
+        const token = Vue.ls.get(ACCESS_TOKEN)
+        getInfo2(token)
+          .then(res => {
+            const user = res.result.user
+            commit('SET_NAME', {
+              username: user.username,
+              realname: user.realname,
+              avatar: user.avatar,
+              welcome: welcome()
+            })
+            resolve(res)
+          })
+          .catch(err => {
+            reject(err)
+          })
       })
     },
 

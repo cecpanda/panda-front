@@ -1,43 +1,50 @@
 <template>
   <div class="user-wrapper">
     <div class="content-box">
-      <a href="https://pro.loacg.com/docs/getting-started" target="_blank">
-        <span class="action">
-          <a-icon type="question-circle-o"></a-icon>
-        </span>
-      </a>
-      <notice-icon class="action"/>
-      <a-dropdown>
-        <span class="action ant-dropdown-link user-dropdown-menu">
-          <a-avatar class="avatar" size="small" :src="avatar()"/>
-          <span>{{ nickname() }}</span>
-        </span>
-        <a-menu slot="overlay" class="user-dropdown-menu-wrapper">
-          <a-menu-item key="0">
-            <router-link :to="{ name: 'center' }">
-              <a-icon type="user"/>
-              <span>个人中心</span>
-            </router-link>
-          </a-menu-item>
-          <a-menu-item key="1">
-            <router-link :to="{ name: 'settings' }">
+      <span class="action" @click="handleSearchIcon">
+        <a-icon type="search" v-if="searchIcon"></a-icon>
+        <a-input-search placeholder="站内搜索" style="width: 12em;" v-else />
+      </span>
+
+      <template v-if="isLogin">
+        <notice-icon class="action"/>
+        <a-dropdown>
+          <span class="action ant-dropdown-link user-dropdown-menu">
+            <a-avatar class="avatar" size="small" :src="avatar()"/>
+            <span>{{ nickname() }}</span>
+          </span>
+          <a-menu slot="overlay" class="user-dropdown-menu-wrapper">
+            <a-menu-item key="0">
+              <router-link :to="{ name: 'center' }">
+                <a-icon type="user"/>
+                <span>个人中心</span>
+              </router-link>
+            </a-menu-item>
+            <a-menu-item key="1">
+              <router-link :to="{ name: 'settings' }">
+                <a-icon type="setting"/>
+                <span>账户设置</span>
+              </router-link>
+            </a-menu-item>
+            <a-menu-item key="2" disabled>
               <a-icon type="setting"/>
-              <span>账户设置</span>
-            </router-link>
-          </a-menu-item>
-          <a-menu-item key="2" disabled>
-            <a-icon type="setting"/>
-            <span>测试</span>
-          </a-menu-item>
-          <a-menu-divider/>
-          <a-menu-item key="3">
-            <a href="javascript:;" @click="handleLogout">
-              <a-icon type="logout"/>
-              <span>退出登录</span>
-            </a>
-          </a-menu-item>
-        </a-menu>
-      </a-dropdown>
+              <span>测试</span>
+            </a-menu-item>
+            <a-menu-divider/>
+            <a-menu-item key="3">
+              <a href="javascript:;" @click="handleLogout">
+                <a-icon type="logout"/>
+                <span>退出登录</span>
+              </a>
+            </a-menu-item>
+          </a-menu>
+        </a-dropdown>
+      </template>
+
+      <a href="/user/login" v-else>
+        <span class="action"><a-icon type="login" /></span>
+      </a>
+
     </div>
   </div>
 </template>
@@ -51,9 +58,21 @@ export default {
   components: {
     NoticeIcon
   },
+  data () {
+    return {
+      searchIcon: true,
+      isLogin: false
+    }
+  },
+  computed: {
+    // ...mapGetters({
+    //   token: 'token',
+    //   realname: 'realname'
+    // })
+  },
   methods: {
-    ...mapActions(['Logout']),
-    ...mapGetters(['nickname', 'avatar']),
+    ...mapActions(['Logout', 'GetInfo2']),
+    ...mapGetters(['nickname', 'avatar', 'username', 'realname', 'token']),
     handleLogout () {
       const that = this
 
@@ -73,7 +92,29 @@ export default {
         onCancel () {
         }
       })
+    },
+    handleSearchIcon () {
+      this.searchIcon = !this.searchIcon
+    },
+    handleIsLogin () {
+      const token = this.token()
+      const username = this.realname()
+      console.log(token)
+      console.log(username)
+      if (token && username) {
+        this.isLogin = true
+      } else {
+        this.isLogin = false
+      }
     }
+  },
+  mounted () {
+    this.GetInfo2()
+    this.handleIsLogin()
   }
 }
 </script>
+
+<style lang='stylus' scoped>
+
+</style>

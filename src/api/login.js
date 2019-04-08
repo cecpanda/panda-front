@@ -14,17 +14,24 @@ import { axios } from '@/utils/request'
  */
 export function login (parameter) {
   return axios({
-    url: '/auth/login',
-    method: 'post',
+    url: 'http://127.0.0.1:8080/mock/mock.json',
+    method: 'get',
     data: parameter
   })
 }
 
 export function getSmsCaptcha (parameter) {
   return axios({
-    url: api.SendSms,
-    method: 'post',
+    url: 'http://127.0.0.1:8080/mock/mock.json',
+    method: 'get',
     data: parameter
+  })
+}
+
+export function getInfo2 (token) {
+  return axios({
+    url: 'http://127.0.0.1:8080/mock/mock.json',
+    method: 'get'
   })
 }
 
@@ -40,8 +47,8 @@ export function getInfo () {
 
 export function logout () {
   return axios({
-    url: '/auth/logout',
-    method: 'post',
+    url: 'http://127.0.0.1:8080/mock/mock.json',
+    method: 'get',
     headers: {
       'Content-Type': 'application/json;charset=UTF-8'
     }
