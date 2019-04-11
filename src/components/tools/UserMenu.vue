@@ -10,7 +10,7 @@
         <notice-icon class="action"/>
         <a-dropdown>
           <span class="action ant-dropdown-link user-dropdown-menu">
-            <a-avatar class="avatar" size="small" :src="avatar()"/>
+            <a-avatar class="avatar" size="large" :src="avatar()"/>
             <span>{{ nickname() }}</span>
           </span>
           <a-menu slot="overlay" class="user-dropdown-menu-wrapper">
@@ -25,10 +25,6 @@
                 <a-icon type="setting"/>
                 <span>账户设置</span>
               </router-link>
-            </a-menu-item>
-            <a-menu-item key="2" disabled>
-              <a-icon type="setting"/>
-              <span>测试</span>
             </a-menu-item>
             <a-menu-divider/>
             <a-menu-item key="3">
@@ -98,9 +94,7 @@ export default {
     },
     handleIsLogin () {
       const token = this.token()
-      const username = this.realname()
-      console.log(token)
-      console.log(username)
+      const username = this.username()
       if (token && username) {
         this.isLogin = true
       } else {
@@ -108,9 +102,9 @@ export default {
       }
     }
   },
-  mounted () {
-    this.GetInfo2()
-    this.handleIsLogin()
+  async created () {
+    await this.GetInfo2()
+    await this.handleIsLogin()
   }
 }
 </script>

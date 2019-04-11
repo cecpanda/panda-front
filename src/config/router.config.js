@@ -15,6 +15,7 @@ export const asyncRouterMap = [
         path: '/',
         name: 'home',
         component: () => import('@/views/home/Home'),
+        hidden: true,
         meta: { title: '首页' }
       },
 
@@ -33,11 +34,11 @@ export const asyncRouterMap = [
             meta: { title: '分析页', keepAlive: false, permission: [ 'dashboard' ] }
           },
           // 外部链接
-          {
-            path: 'https://www.baidu.com/',
-            name: 'Monitor',
-            meta: { title: '监控页（外部）', target: '_blank' }
-          },
+          // {
+          //   path: 'https://www.baidu.com/',
+          //   name: 'Monitor',
+          //   meta: { title: '监控页（外部）', target: '_blank' }
+          // },
           {
             path: '/dashboard/workplace',
             name: 'Workplace',
@@ -75,14 +76,15 @@ export const asyncRouterMap = [
         path: '/account',
         component: RouteView,
         redirect: '/account/center',
+        hidden: true,
         name: 'account',
-        meta: { title: '个人页', icon: 'user', keepAlive: true, permission: [ 'user' ] },
+        meta: { title: '个人页', icon: 'user', keepAlive: true },
         children: [
           {
-            path: '/account/center',
+            path: 'center',
             name: 'center',
             component: () => import('@/views/account/center/Index'),
-            meta: { title: '个人中心', keepAlive: true, permission: [ 'user' ] }
+            meta: { title: '个人中心', keepAlive: true }
           },
           {
             path: '/account/settings',
@@ -163,18 +165,18 @@ export const constantRouterMap = [
     ]
   },
 
-  {
-    path: '/test',
-    component: BlankLayout,
-    redirect: '/test/home',
-    children: [
-      {
-        path: 'home',
-        name: 'TestHome',
-        component: () => import('@/views/Home')
-      }
-    ]
-  },
+  // {
+  //   path: '/test',
+  //   component: BlankLayout,
+  //   redirect: '/test/home',
+  //   children: [
+  //     {
+  //       path: 'home',
+  //       name: 'TestHome',
+  //       component: () => import('@/views/Home')
+  //     }
+  //   ]
+  // },
 
   {
     path: '/404',

@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import axios from 'axios'
 import store from '@/store'
+import router from '@/router'
 import {
   VueAxios
 } from './axios'
@@ -11,7 +12,7 @@ import {
 
 // 创建 axios 实例
 const service = axios.create({
-  baseURL: '/api', // api base_url
+  baseURL: '/', // api base_url
   timeout: 6000 // 请求超时时间
 })
 
@@ -37,24 +38,28 @@ const err = (error) => {
           }, 1500)
         })
       }
+      router.push({ name: 'login', query: { redirect: router.currentRoute.fullPath } })
     }
   }
-  return Promise.reject(error)
+  return Promise.reject(error.response.data)
 }
 
 // request interceptor
 service.interceptors.request.use(config => {
   const token = Vue.ls.get(ACCESS_TOKEN)
   if (token) {
-    config.headers['Access-Token'] = token // 让每个请求携带自定义 token 请根据实际情况自行修改
+    config.headers['Authorization'] = 'JWT ' + token // 让每个请求携带自定义 token 请根据实际情况自行修改
   }
   return config
 }, err)
 
 // response interceptor
-service.interceptors.response.use((response) => {
-  return response.data
-}, err)
+service.interceptors.response.use(
+  response => {
+    return response.data
+  },
+  err
+)
 
 const installer = {
   vm: {},

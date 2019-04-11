@@ -114,7 +114,7 @@
 </template>
 
 <script>
-import md5 from 'md5'
+// import md5 from 'md5'
 import { mapActions } from 'vuex'
 import { timeFix } from '@/utils/util'
 import { getSmsCaptcha } from '@/api/login'
@@ -254,7 +254,7 @@ export default {
 
       validateFields(fields, { force: true }, (err, values) => {
         if (!err) {
-          values.password = md5(values.password)
+          // values.password = md5(values.password)
           Login(values)
             .then((res) => {
               this.$router.push({ name: 'index' })
@@ -266,7 +266,7 @@ export default {
                 })
               }, 2000)
             })
-            .catch(err => {
+            .catch((err) => {
               this.$notification['error']({
                 message: '错误',
                 description: ((err.response || {}).data || {}).message || '请求出现错误，请稍后再试',

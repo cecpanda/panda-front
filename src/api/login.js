@@ -14,23 +14,23 @@ import { axios } from '@/utils/request'
  */
 export function login (parameter) {
   return axios({
-    url: 'http://127.0.0.1:8080/mock/mock.json',
-    method: 'get',
+    url: api.Login,
+    method: 'post',
     data: parameter
   })
 }
 
 export function getSmsCaptcha (parameter) {
   return axios({
-    url: 'http://127.0.0.1:8080/mock/mock.json',
+    url: api.SmsCaptcha,
     method: 'get',
     data: parameter
   })
 }
 
-export function getInfo2 (token) {
+export function getInfo2 () {
   return axios({
-    url: 'http://127.0.0.1:8080/mock/mock.json',
+    url: api.UserInfo,
     method: 'get'
   })
 }

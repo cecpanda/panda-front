@@ -40,7 +40,7 @@
       </a-spin>
     </template>
     <span @click="fetchNotice" class="header-notice">
-      <a-badge count="12">
+      <a-badge count="0">
         <a-icon style="font-size: 16px; padding: 4px" type="bell" />
       </a-badge>
     </span>
@@ -62,7 +62,7 @@ export default {
         this.loadding = true
         setTimeout(() => {
           this.loadding = false
-        }, 2000)
+        }, 1500)
       } else {
         this.loadding = false
       }

@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { login, getInfo, getInfo2, logout } from '@/api/login'
+import { login, getInfo, getInfo2 } from '@/api/login'
 import { ACCESS_TOKEN } from '@/store/mutation-types'
 import { welcome } from '@/utils/util'
 
@@ -42,10 +42,9 @@ const user = {
     // 登录
     Login ({ commit }, userInfo) {
       return new Promise((resolve, reject) => {
-        login(userInfo).then(response => {
-          const result = response.result
-          Vue.ls.set(ACCESS_TOKEN, result.token, 7 * 24 * 60 * 60 * 1000)
-          commit('SET_TOKEN', result.token)
+        login(userInfo).then(res => {
+          Vue.ls.set(ACCESS_TOKEN, res.token, 7 * 24 * 60 * 60 * 1000)
+          commit('SET_TOKEN', res.token)
           resolve()
         }).catch(error => {
           reject(error)
@@ -55,14 +54,12 @@ const user = {
 
     GetInfo2 ({ commit }) {
       return new Promise((resolve, reject) => {
-        const token = Vue.ls.get(ACCESS_TOKEN)
-        getInfo2(token)
+        getInfo2()
           .then(res => {
-            const user = res.result.user
             commit('SET_NAME', {
-              username: user.username,
-              realname: user.realname,
-              avatar: user.avatar,
+              username: res.username,
+              realname: res.realname,
+              avatar: res.avatar,
               welcome: welcome()
             })
             resolve(res)
@@ -107,17 +104,22 @@ const user = {
 
     // 登出
     Logout ({ commit, state }) {
-      return new Promise((resolve) => {
-        commit('SET_TOKEN', '')
-        commit('SET_ROLES', [])
-        Vue.ls.remove(ACCESS_TOKEN)
+      commit('SET_TOKEN', '')
+      // commit('SET_ROLES', [])
+      commit('SET_NAME', {})
+      Vue.ls.remove(ACCESS_TOKEN)
+      // return new Promise((resolve) => {
+      //   commit('SET_TOKEN', '')
+      //   // commit('SET_ROLES', [])
+      //   commit('SET_NAME', {})
+      //   Vue.ls.remove(ACCESS_TOKEN)
 
-        logout(state.token).then(() => {
-          resolve()
-        }).catch(() => {
-          resolve()
-        })
-      })
+      //   logout(state.token).then(() => {
+      //     resolve()
+      //   }).catch(() => {
+      //     resolve()
+      //   })
+      // })
     }
 
   }

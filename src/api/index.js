@@ -1,12 +1,12 @@
+const authHost = process.env.VUE_APP_AUTH_HOST
+
 const api = {
-  Login: '/auth/login',
-  Logout: '/auth/logout',
-  ForgePassword: '/auth/forge-password',
-  Register: '/auth/register',
-  twoStepCode: '/auth/2step-code',
-  SendSms: '/account/sms',
-  SendSmsErr: '/account/sms_err',
+  Login: `${authHost}/jwt/auth/`,
+  ForgePassword: `${authHost}/account/forge-password/`,
+  Register: `${authHost}/account/register/`,
+  SmsCaptcha: '/mock/mock.json',
   // get my info
-  UserInfo: '/user/info'
+  UserInfo: `${authHost}/account/user/info/`
 }
+
 export default api
