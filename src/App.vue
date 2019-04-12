@@ -17,8 +17,9 @@ export default {
       locale: zhCN
     }
   },
+  methods: {
+  },
   mounted () {
-
   }
 }
 </script>

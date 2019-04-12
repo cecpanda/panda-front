@@ -5,9 +5,9 @@
         <a-card :bordered="false">
           <div class="account-center-avatarHolder">
             <div class="avatar">
-              <img :src="avatar()">
+              <img>
             </div>
-            <div class="username">{{ nickname() }}</div>
+            <div class="username"></div>
             <div class="bio">海纳百川，有容乃大</div>
           </div>
           <div class="account-center-detail">
@@ -27,7 +27,7 @@
 
           <a-divider :dashed="true"/>
 
-          <div class="account-center-team">
+          <!-- <div class="account-center-team">
             <div class="teamTitle">团队</div>
             <a-spin :spinning="teamSpinning">
               <div class="members">
@@ -41,7 +41,7 @@
                 </a-row>
               </div>
             </a-spin>
-          </div>
+          </div> -->
         </a-card>
       </a-col>
       <a-col :md="24" :lg="17">
@@ -64,7 +64,7 @@
 <script>
 import { PageView, RouteView } from '@/layouts'
 import { AppPage, ArticlePage, ProjectPage } from './page'
-import { getInfo } from '@/api/user'
+import { getUser } from '@/api/user'
 
 import { mapGetters } from 'vuex'
 
@@ -78,7 +78,7 @@ export default {
   },
   data () {
     return {
-      teams: [],
+      user: {},
       teamSpinning: true,
 
       tabListNoTitle: [
@@ -98,19 +98,18 @@ export default {
       noTitleKey: 'app'
     }
   },
-  mounted () {
-    // this.getTeams()
-    getInfo()
+  async mounted () {
+    const username = this.username()
+    getUser(username)
+      .then(res => {
+        console.log(res)
+      })
+      .catch(err => {
+        console.log(err)
+      })
   },
   methods: {
-    ...mapGetters(['nickname', 'avatar']),
-
-    // getTeams () {
-    //   this.$http.get('/workplace/teams').then(res => {
-    //     this.teams = res.result
-    //     this.teamSpinning = false
-    //   })
-    // },
+    ...mapGetters(['username']),
     handleTabChange (key, type) {
       this[type] = key
     }

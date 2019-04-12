@@ -2,16 +2,16 @@
   <div class="user-wrapper">
     <div class="content-box">
       <span class="action" @click="handleSearchIcon">
-        <a-icon type="search" v-if="searchIcon"></a-icon>
+        <a-icon type="search" v-if="searchIcon" style="font-size: 1.5em"></a-icon>
         <a-input-search placeholder="站内搜索" style="width: 12em;" v-else />
       </span>
 
-      <template v-if="isLogin">
+      <template v-if="loginStatus()">
         <notice-icon class="action"/>
         <a-dropdown>
           <span class="action ant-dropdown-link user-dropdown-menu">
-            <a-avatar class="avatar" size="large" :src="avatar()"/>
-            <span>{{ nickname() }}</span>
+            <a-avatar class="avatar" size="large" :src="userInfo.avatar"/>
+            <!-- <span>{{ userInfo.username }}</span> -->
           </span>
           <a-menu slot="overlay" class="user-dropdown-menu-wrapper">
             <a-menu-item key="0">
@@ -38,7 +38,7 @@
       </template>
 
       <a href="/user/login" v-else>
-        <span class="action"><a-icon type="login" /></span>
+        <span class="action"><a-icon type="login" style="font-size: 1.5em"/></span>
       </a>
 
     </div>
@@ -57,7 +57,7 @@ export default {
   data () {
     return {
       searchIcon: true,
-      isLogin: false
+      userInfo: {}
     }
   },
   computed: {
@@ -67,8 +67,8 @@ export default {
     // })
   },
   methods: {
-    ...mapActions(['Logout', 'GetInfo2']),
-    ...mapGetters(['nickname', 'avatar', 'username', 'realname', 'token']),
+    ...mapActions(['Logout', 'InitLoginStatus']),
+    ...mapGetters(['token', 'loginStatus', 'user']),
     handleLogout () {
       const that = this
 
@@ -88,23 +88,18 @@ export default {
         onCancel () {
         }
       })
+      this.$router.push({ name: 'home' })
     },
     handleSearchIcon () {
       this.searchIcon = !this.searchIcon
-    },
-    handleIsLogin () {
-      const token = this.token()
-      const username = this.username()
-      if (token && username) {
-        this.isLogin = true
-      } else {
-        this.isLogin = false
-      }
     }
   },
-  async created () {
-    await this.GetInfo2()
-    await this.handleIsLogin()
+  async mounted () {
+    await this.InitLoginStatus()
+    this.userInfo = this.user()
+    // console.log('token: ', this.token())
+    // console.log('loginstatus: ', this.loginStatus())
+    // console.log('user: ', this.user())
   }
 }
 </script>

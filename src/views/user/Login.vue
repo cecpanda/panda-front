@@ -115,8 +115,8 @@
 
 <script>
 // import md5 from 'md5'
-import { mapActions } from 'vuex'
-import { timeFix } from '@/utils/util'
+import { mapActions, mapGetters } from 'vuex'
+import { timeFix, welcome } from '@/utils/util'
 import { getSmsCaptcha } from '@/api/login'
 
 export default {
@@ -177,7 +177,8 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['Login', 'Logout', 'GetInfo']),
+    ...mapActions(['Login', 'Logout', 'InitLoginStatus']),
+    ...mapGetters(['loginStatus']),
     handleTabClick (key) {
       this.activeKey = key
       if (key === 'tab2') {
@@ -261,15 +262,15 @@ export default {
               // 延迟 1 秒显示欢迎信息
               setTimeout(() => {
                 this.$notification.success({
-                  message: '欢迎',
-                  description: `${timeFix()}，欢迎回来`
+                  message: `${timeFix()}`,
+                  description: `${welcome()}`
                 })
               }, 2000)
             })
             .catch((err) => {
               this.$notification['error']({
                 message: '错误',
-                description: ((err.response || {}).data || {}).message || '请求出现错误，请稍后再试',
+                description: ((err.response || {}).data || {}).message || '错误的账号或密码',
                 duration: 3
               })
             })
@@ -278,6 +279,16 @@ export default {
       setTimeout(() => {
         state.loginBtn = false
       }, 500)
+    }
+  },
+  async mounted () {
+    await this.InitLoginStatus()
+    if (this.loginStatus()) {
+      this.$notification.success({
+        message: '你已经登录了',
+        description: `${welcome()}`
+      })
+      this.$router.push({ name: 'account' })
     }
   }
 }

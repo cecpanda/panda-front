@@ -6,10 +6,10 @@ export function timeFix () {
 
 export function welcome () {
   const arr = [
-    '休息一会儿吧',
     '准备吃什么呢?',
     '守望先锋开黑吗，我半藏贼6！',
-    '士兵76向您报道'
+    '士兵76向你报道',
+    '即使在这里，我也是个外乡人'
   ]
   const index = Math.floor(Math.random() * arr.length)
   return arr[index]

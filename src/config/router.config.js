@@ -78,7 +78,7 @@ export const asyncRouterMap = [
         redirect: '/account/center',
         hidden: true,
         name: 'account',
-        meta: { title: '个人页', icon: 'user', keepAlive: true },
+        meta: { title: '个人页', icon: 'user', keepAlive: true, requireAuth: true },
         children: [
           {
             path: 'center',

@@ -5,37 +5,45 @@ import { welcome } from '@/utils/util'
 
 const user = {
   state: {
-    token: '',
-    name: '',
-    welcome: '',
-    avatar: '',
-    roles: [],
-    info: {}
+    token: '', // 为什么刷新后 state.token 还在？因为 bootstrap()
+    username: '',
+    realname: '',
+    avatar: ''
+    // name: '',
+    // welcome: '',
+    // avatar: '',
+    // roles: [],
+    // info: {}
   },
 
   mutations: {
     SET_TOKEN: (state, token) => {
       state.token = token
     },
+    SET_USER: (state, user) => {
+      state.username = user.username
+      state.realname = user.realname
+      state.avatar = user.avatar
+    }
     // SET_NAME: (state, { name, welcome }) => {
     //   state.name = name
     //   state.welcome = welcome
     // },
-    SET_NAME: (state, { username, realname, avatar, welcome }) => {
-      state.username = username
-      state.realname = realname
-      state.avatar = avatar
-      state.welcome = welcome
-    },
-    SET_AVATAR: (state, avatar) => {
-      state.avatar = avatar
-    },
-    SET_ROLES: (state, roles) => {
-      state.roles = roles
-    },
-    SET_INFO: (state, info) => {
-      state.info = info
-    }
+    // SET_NAME: (state, { username, realname, avatar, welcome }) => {
+    //   state.username = username
+    //   state.realname = realname
+    //   state.avatar = avatar
+    //   state.welcome = welcome
+    // },
+    // SET_AVATAR: (state, avatar) => {
+    //   state.avatar = avatar
+    // },
+    // SET_ROLES: (state, roles) => {
+    //   state.roles = roles
+    // },
+    // SET_INFO: (state, info) => {
+    //   state.info = info
+    // }
   },
 
   actions: {
@@ -52,20 +60,16 @@ const user = {
       })
     },
 
-    GetInfo2 ({ commit }) {
+    InitLoginStatus ({ commit }) {
       return new Promise((resolve, reject) => {
         getInfo2()
           .then(res => {
-            commit('SET_NAME', {
-              username: res.username,
-              realname: res.realname,
-              avatar: res.avatar,
-              welcome: welcome()
-            })
+            commit('SET_USER', res)
             resolve(res)
           })
           .catch(err => {
-            reject(err)
+            // reject(err)  // 当token 错误时会在console中打印 vue warn
+            console.log(err)
           })
       })
     },
@@ -106,7 +110,7 @@ const user = {
     Logout ({ commit, state }) {
       commit('SET_TOKEN', '')
       // commit('SET_ROLES', [])
-      commit('SET_NAME', {})
+      commit('SET_USER', {})
       Vue.ls.remove(ACCESS_TOKEN)
       // return new Promise((resolve) => {
       //   commit('SET_TOKEN', '')

@@ -6,7 +6,8 @@ const api = {
   Register: `${authHost}/account/register/`,
   SmsCaptcha: '/mock/mock.json',
   // get my info
-  UserInfo: `${authHost}/account/user/info/`
+  UserInfo: `${authHost}/account/info/`,
+  User: `${authHost}/account/user/`
 }
 
 export default api

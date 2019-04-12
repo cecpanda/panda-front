@@ -41,7 +41,7 @@
     </template>
     <span @click="fetchNotice" class="header-notice">
       <a-badge count="0">
-        <a-icon style="font-size: 16px; padding: 4px" type="bell" />
+        <a-icon style="font-size: 1.5em; padding: 4px" type="bell" />
       </a-badge>
     </span>
   </a-popover>
@@ -62,7 +62,7 @@ export default {
         this.loadding = true
         setTimeout(() => {
           this.loadding = false
-        }, 1500)
+        }, 1000)
       } else {
         this.loadding = false
       }
