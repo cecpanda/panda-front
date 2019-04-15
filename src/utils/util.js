@@ -8,8 +8,7 @@ export function welcome () {
   const arr = [
     '准备吃什么呢?',
     '守望先锋开黑吗，我半藏贼6！',
-    '士兵76向你报道',
-    '即使在这里，我也是个外乡人'
+    '士兵76向你报道'
   ]
   const index = Math.floor(Math.random() * arr.length)
   return arr[index]

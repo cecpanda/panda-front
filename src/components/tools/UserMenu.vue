@@ -77,6 +77,7 @@ export default {
         content: '真的要注销登录吗 ?',
         onOk () {
           return that.Logout({}).then(() => {
+            // this.$router.push({ name: 'home' })
             window.location.reload()
           }).catch(err => {
             that.$message.error({
@@ -88,7 +89,6 @@ export default {
         onCancel () {
         }
       })
-      this.$router.push({ name: 'home' })
     },
     handleSearchIcon () {
       this.searchIcon = !this.searchIcon

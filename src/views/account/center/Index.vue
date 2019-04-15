@@ -5,47 +5,58 @@
         <a-card :bordered="false">
           <div class="account-center-avatarHolder">
             <div class="avatar">
-              <img>
+              <img :src="userInfo.avatar">
             </div>
-            <div class="username"></div>
-            <div class="bio">海纳百川，有容乃大</div>
+            <div class="username">{{ userInfo.username }}</div>
+            <div class="bio">{{ userInfo.brief }}</div>
           </div>
           <div class="account-center-detail">
             <p>
-              <i class="title"></i>交互专家
+              <i class="job"></i>{{ userInfo.job }}
             </p>
             <p>
-              <i class="group"></i>蚂蚁金服－某某某事业群－某某平台部－某某技术部－UED
+              <i class="room"></i>华东科技-{{ userInfo.department }}-{{ userInfo.room }}
             </p>
-            <p>
+            <!-- <p>
               <i class="address"></i>
               <span>浙江省</span>
               <span>杭州市</span>
-            </p>
+            </p> -->
           </div>
           <a-divider/>
 
           <a-divider :dashed="true"/>
 
-          <!-- <div class="account-center-team">
+          <div class="account-center-team">
             <div class="teamTitle">团队</div>
-            <a-spin :spinning="teamSpinning">
+            <!-- <a-spin :spinning="teamSpinning">
               <div class="members">
                 <a-row>
-                  <a-col :span="12" v-for="(item, index) in teams" :key="index">
+                  <a-col :span="12" v-for="(item, index) in userInfo.groups" :key="index">
                     <a>
                       <a-avatar size="small" :src="item.avatar"/>
-                      <span class="member">{{ item.name }}</span>
+                      <span class="member">{{ item }}</span>
                     </a>
                   </a-col>
                 </a-row>
               </div>
-            </a-spin>
-          </div> -->
+            </a-spin> -->
+            <div class="members">
+              <a-row>
+                <a-col :span="12" v-for="(item, index) in userInfo.groups" :key="index">
+                  <a>
+                    <!-- <a-avatar size="small" :src="item.avatar"/> -->
+                    <a-icon type="usergroup-add" />
+                    <span class="member">{{ item }}</span>
+                  </a>
+                </a-col>
+              </a-row>
+            </div>
+          </div>
         </a-card>
       </a-col>
       <a-col :md="24" :lg="17">
-        <a-card
+        <!-- <a-card
           style="width:100%"
           :bordered="false"
           :tabList="tabListNoTitle"
@@ -55,7 +66,7 @@
           <article-page v-if="noTitleKey === 'article'"></article-page>
           <app-page v-else-if="noTitleKey === 'app'"></app-page>
           <project-page v-else-if="noTitleKey === 'project'"></project-page>
-        </a-card>
+        </a-card> -->
       </a-col>
     </a-row>
   </div>
@@ -64,9 +75,8 @@
 <script>
 import { PageView, RouteView } from '@/layouts'
 import { AppPage, ArticlePage, ProjectPage } from './page'
-import { getUser } from '@/api/user'
-
 import { mapGetters } from 'vuex'
+import { getUser } from '@/api/user'
 
 export default {
   components: {
@@ -78,7 +88,7 @@ export default {
   },
   data () {
     return {
-      user: {},
+      userInfo: {},
       teamSpinning: true,
 
       tabListNoTitle: [
@@ -98,18 +108,15 @@ export default {
       noTitleKey: 'app'
     }
   },
-  async mounted () {
-    const username = this.username()
+  mounted () {
+    const username = this.user().username
     getUser(username)
       .then(res => {
-        console.log(res)
-      })
-      .catch(err => {
-        console.log(err)
+        this.userInfo = res
       })
   },
   methods: {
-    ...mapGetters(['username']),
+    ...mapGetters(['user']),
     handleTabChange (key, type) {
       this[type] = key
     }
@@ -166,10 +173,10 @@ export default {
       background: url(https://gw.alipayobjects.com/zos/rmsportal/pBjWzVAHnOOtAUvZmZfy.svg);
     }
 
-    .title {
+    .job {
       background-position: 0 0;
     }
-    .group {
+    .room {
       background-position: 0 -22px;
     }
     .address {

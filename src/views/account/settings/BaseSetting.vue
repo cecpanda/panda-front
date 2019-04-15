@@ -4,49 +4,44 @@
       <a-col :md="24" :lg="16">
 
         <a-form layout="vertical">
-          <a-form-item
-            label="昵称"
-          >
-            <a-input placeholder="给自己起个名字" />
+          <a-form-item label="用户名">
+            {{ userInfo.username }}
           </a-form-item>
           <a-form-item
-            label="Bio"
+            label="真名"
           >
-            <a-textarea rows="4" placeholder="You are not alone."/>
+            <a-input :value="userInfo.realname" />
           </a-form-item>
-
           <a-form-item
             label="电子邮件"
-            :required="false"
           >
-            <a-input placeholder="exp@admin.com"/>
+            <a-input :value="userInfo.email" />
           </a-form-item>
           <a-form-item
-            label="加密方式"
-            :required="false"
+            label="手机"
           >
-            <a-select defaultValue="aes-256-cfb">
-              <a-select-option value="aes-256-cfb">aes-256-cfb</a-select-option>
-              <a-select-option value="aes-128-cfb">aes-128-cfb</a-select-option>
-              <a-select-option value="chacha20">chacha20</a-select-option>
-            </a-select>
+            <a-input :value="userInfo.mobile" />
           </a-form-item>
           <a-form-item
-            label="连接密码"
-            :required="false"
+            label="性别"
           >
-            <a-input placeholder="h3gSbecd"/>
+            <a-radio-group v-model="userInfo.gender">
+              <a-radio value="M">男</a-radio>
+              <a-radio value="F">女</a-radio>
+            </a-radio-group>
           </a-form-item>
           <a-form-item
-            label="登录密码"
-            :required="false"
+            label="职位"
           >
-            <a-input placeholder="密码"/>
+            <a-input :value="userInfo.job" />
           </a-form-item>
-
+          <a-form-item
+            label="简介"
+          >
+            <a-textarea rows="4" :value="userInfo.brief" />
+          </a-form-item>
           <a-form-item>
             <a-button type="primary">提交</a-button>
-            <a-button style="margin-left: 8px">保存</a-button>
           </a-form-item>
         </a-form>
 
@@ -57,20 +52,21 @@
           <div class="mask">
             <a-icon type="plus" />
           </div>
-          <img :src="option.img"/>
+          <img :src="userInfo.avatar"/>
         </div>
       </a-col>
 
     </a-row>
 
-    <avatar-modal ref="modal">
+    <avatar-modal :avatar="user().avatar" ref="modal"></avatar-modal>
 
-    </avatar-modal>
   </div>
 </template>
 
 <script>
 import AvatarModal from './AvatarModal'
+import { mapGetters } from 'vuex'
+import { getUser } from '@/api/user'
 
 export default {
   components: {
@@ -78,27 +74,18 @@ export default {
   },
   data () {
     return {
-      // cropper
-      preview: {},
-      option: {
-        img: '/avatar2.jpg',
-        info: true,
-        size: 1,
-        outputType: 'jpeg',
-        canScale: false,
-        autoCrop: true,
-        // 只有自动截图开启 宽度高度才生效
-        autoCropWidth: 180,
-        autoCropHeight: 180,
-        fixedBox: true,
-        // 开启宽度和高度比例
-        fixed: true,
-        fixedNumber: [1, 1]
-      }
+      userInfo: {}
     }
   },
   methods: {
-
+    ...mapGetters(['user'])
+  },
+  mounted () {
+    const username = this.user().username
+    getUser(username)
+      .then(res => {
+        this.userInfo = res
+      })
   }
 }
 </script>

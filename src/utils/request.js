@@ -40,6 +40,12 @@ const err = (error) => {
       }
       router.push({ name: 'login', query: { redirect: router.currentRoute.fullPath } })
     }
+    if (error.response.status === 500) {
+      notification.error({
+        message: 'Error',
+        description: '后台服务器出现错误'
+      })
+    }
   }
   return Promise.reject(error.response.data)
 }

@@ -12,8 +12,9 @@ const router = new Router({
   routes: constantRouterMap.concat(asyncRouterMap)
 })
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
   if (to.matched.some(r => r.meta.requireAuth)) {
+    await store.dispatch('InitLoginStatus')
     if (store.getters.loginStatus) {
       next()
     } else {

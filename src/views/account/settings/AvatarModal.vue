@@ -5,7 +5,23 @@
     :maskClosable="false"
     :confirmLoading="confirmLoading"
     :width="800"
-    @cancel="cancelHandel">
+    @cancel="cancelHandel"
+  >
+    <a-row>
+      <a-col :xs="24" :md="12" :style="{marginBottom: '15px'}">
+        <a-upload
+          name="file"
+          accept=".png,.jpg,.jpeg"
+          :showUploadList="false"
+          :beforeUpload="beforeUpload"
+          @change="handleChange"
+        >
+          <a-button>
+            <a-icon type="upload" />上传
+          </a-button>
+        </a-upload>
+      </a-col>
+    </a-row>
     <a-row>
       <a-col :xs="24" :md="12" :style="{height: '350px'}">
         <vue-cropper
@@ -33,6 +49,7 @@
     </template>
   </a-modal>
 </template>
+
 <script>
 // import { VueCropper } from 'vue-cropper'
 
@@ -42,6 +59,12 @@ export default {
     VueCropper
   },
   */
+  props: {
+    avatar: {
+      type: String,
+      default: '/avatar.jpeg'
+    }
+  },
   data () {
     return {
       visible: false,
@@ -49,7 +72,7 @@ export default {
       confirmLoading: false,
 
       options: {
-        img: '/avatar2.jpg',
+        img: this.avatar,
         autoCrop: true,
         autoCropWidth: 200,
         autoCropHeight: 200,
@@ -57,6 +80,8 @@ export default {
       },
       previews: {}
     }
+  },
+  computed: {
   },
   methods: {
     edit (id) {
@@ -81,10 +106,18 @@ export default {
         vm.$message.success('上传头像成功')
       }, 2000)
     },
-
     realTime (data) {
       this.previews = data
+    },
+    beforeUpload (file) {
+      return false
+    },
+    handleChange (info) {
+      console.log(info.file)
+      this.options.img = info.file.url
     }
+  },
+  mounted () {
   }
 }
 </script>
