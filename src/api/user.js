@@ -12,3 +12,11 @@ export const getUser = (username) => {
 export const changeAvatar = (data) => {
   return axios.post(`${api.User}change-avatar/`, data)
 }
+
+export const changeProfile = (data) => {
+  return axios.post(`${api.User}change-profile/`, data)
+}
+
+export const changePassword = (data) => {
+  return axios.post(`${api.User}change-password/`, data)
+}

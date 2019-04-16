@@ -3,29 +3,33 @@
     <a-row :gutter="16">
       <a-col :md="24" :lg="16">
 
-        <a-form layout="vertical">
+        <a-form
+          layout="vertical"
+          :form="form"
+          @submit="handleSubmit"
+        >
           <a-form-item label="用户名">
             {{ userInfo.username }}
           </a-form-item>
           <a-form-item
             label="真名"
           >
-            <a-input :value="userInfo.realname" />
+            <a-input v-decorator="rules.realname" />
           </a-form-item>
           <a-form-item
             label="电子邮件"
           >
-            <a-input :value="userInfo.email" />
+            <a-input v-decorator="rules.email" />
           </a-form-item>
           <a-form-item
             label="手机"
           >
-            <a-input :value="userInfo.mobile" />
+            <a-input v-decorator="rules.mobile" />
           </a-form-item>
           <a-form-item
             label="性别"
           >
-            <a-radio-group v-model="userInfo.gender">
+            <a-radio-group v-decorator="rules.gender">
               <a-radio value="M">男</a-radio>
               <a-radio value="F">女</a-radio>
             </a-radio-group>
@@ -33,15 +37,16 @@
           <a-form-item
             label="职位"
           >
-            <a-input :value="userInfo.job" />
+            <a-input v-decorator="rules.job" />
           </a-form-item>
           <a-form-item
             label="简介"
           >
-            <a-textarea rows="4" :value="userInfo.brief" />
+            <a-textarea rows="4" v-decorator="rules.brief" />
           </a-form-item>
           <a-form-item>
-            <a-button type="primary">提交</a-button>
+            <a-button type="default" class="reset-button" @click="handleResetFields">重置</a-button>
+            <a-button type="primary" htmlType="submit">提交</a-button>
           </a-form-item>
         </a-form>
 
@@ -71,7 +76,7 @@
 <script>
 import AvatarModal from './AvatarModal'
 import { mapGetters } from 'vuex'
-import { getUser } from '@/api/user'
+import { getUser, changeProfile } from '@/api/user'
 
 export default {
   components: {
@@ -79,7 +84,68 @@ export default {
   },
   data () {
     return {
-      userInfo: {}
+      userInfo: {},
+      form: this.$form.createForm(this)
+    }
+  },
+  computed: {
+    rules () {
+      return {
+        realname: [
+          'realname',
+          {
+            initialValue: this.userInfo.realname,
+            rules: [
+              { required: true, max: 10, message: '不超过10个字符' }
+            ]
+          }
+        ],
+        email: [
+          'email',
+          {
+            initialValue: this.userInfo.email,
+            rules: [
+              { required: false, type: 'email', message: '请输入正确的邮箱' }
+            ]
+          }
+        ],
+        mobile: [
+          'mobile',
+          {
+            initialValue: this.userInfo.mobile,
+            rules: [
+              { required: false, max: 20, message: '不超过20个字符' }
+            ]
+          }
+        ],
+        gender: [
+          'gender',
+          {
+            initialValue: this.userInfo.gender,
+            rules: [
+              { required: true }
+            ]
+          }
+        ],
+        job: [
+          'job',
+          {
+            initialValue: this.userInfo.job,
+            rules: [
+              { required: false, max: 10, message: '不超过10个字符' }
+            ]
+          }
+        ],
+        brief: [
+          'brief',
+          {
+            initialValue: this.userInfo.brief,
+            rules: [
+              { required: false, max: 50, message: '不超过50个字符' }
+            ]
+          }
+        ]
+      }
     }
   },
   methods: {
@@ -94,6 +160,24 @@ export default {
     handleAvatarChanged (avatar) {
       this.userInfo.avatar = avatar
       this.$store.commit('SET_AVATAR', avatar)
+    },
+    handleResetFields () {
+      this.form.resetFields()
+    },
+    handleSubmit (e) {
+      e.preventDefault()
+      this.form.validateFields((err, values) => {
+        if (!err) {
+          changeProfile(values)
+            .then(res => {
+              this.$message.success('修改成功')
+              this.getUserInfo()
+            })
+            .catch(err => {
+              this.$message.error(`修改失败: ${err}`)
+            })
+        }
+      })
     }
   },
   mounted () {
@@ -103,6 +187,9 @@ export default {
 </script>
 
 <style lang="less" scoped>
+  .reset-button {
+    margin-right: 25px;
+  }
 
   .avatar-upload-wrapper {
     height: 200px;

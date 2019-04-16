@@ -111,19 +111,19 @@ export const asyncRouterMap = [
                 name: 'CustomSettings',
                 component: () => import('@/views/account/settings/Custom'),
                 meta: { title: '个性化设置', hidden: true, keepAlive: true, permission: [ 'user' ] }
-              },
-              {
-                path: '/account/settings/binding',
-                name: 'BindingSettings',
-                component: () => import('@/views/account/settings/Binding'),
-                meta: { title: '账户绑定', hidden: true, keepAlive: true, permission: [ 'user' ] }
-              },
-              {
-                path: '/account/settings/notification',
-                name: 'NotificationSettings',
-                component: () => import('@/views/account/settings/Notification'),
-                meta: { title: '新消息通知', hidden: true, keepAlive: true, permission: [ 'user' ] }
               }
+              // {
+              //   path: '/account/settings/binding',
+              //   name: 'BindingSettings',
+              //   component: () => import('@/views/account/settings/Binding'),
+              //   meta: { title: '账户绑定', hidden: true, keepAlive: true, permission: [ 'user' ] }
+              // },
+              // {
+              //   path: '/account/settings/notification',
+              //   name: 'NotificationSettings',
+              //   component: () => import('@/views/account/settings/Notification'),
+              //   meta: { title: '新消息通知', hidden: true, keepAlive: true, permission: [ 'user' ] }
+              // }
             ]
           }
         ]
