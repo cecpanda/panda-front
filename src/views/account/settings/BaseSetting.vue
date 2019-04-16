@@ -58,7 +58,12 @@
 
     </a-row>
 
-    <avatar-modal :avatar="user().avatar" ref="modal"></avatar-modal>
+    <avatar-modal
+      :avatar="user().avatar"
+      @changeAvatar="handleAvatarChanged"
+      ref="modal"
+    >
+    </avatar-modal>
 
   </div>
 </template>
@@ -78,14 +83,21 @@ export default {
     }
   },
   methods: {
-    ...mapGetters(['user'])
+    ...mapGetters(['user']),
+    getUserInfo () {
+      const username = this.user().username
+      getUser(username)
+        .then(res => {
+          this.userInfo = res
+        })
+    },
+    handleAvatarChanged (avatar) {
+      this.userInfo.avatar = avatar
+      this.$store.commit('SET_AVATAR', avatar)
+    }
   },
   mounted () {
-    const username = this.user().username
-    getUser(username)
-      .then(res => {
-        this.userInfo = res
-      })
+    this.getUserInfo()
   }
 }
 </script>

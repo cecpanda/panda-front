@@ -10,7 +10,7 @@
         <notice-icon class="action"/>
         <a-dropdown>
           <span class="action ant-dropdown-link user-dropdown-menu">
-            <a-avatar class="avatar" size="large" :src="userInfo.avatar"/>
+            <a-avatar class="avatar" size="large" :src="user().avatar"/>
             <!-- <span>{{ userInfo.username }}</span> -->
           </span>
           <a-menu slot="overlay" class="user-dropdown-menu-wrapper">

@@ -28,6 +28,7 @@
           ref="cropper"
           :img="options.img"
           :info="true"
+          outputType="png"
           :autoCrop="options.autoCrop"
           :autoCropWidth="options.autoCropWidth"
           :autoCropHeight="options.autoCropHeight"
@@ -52,6 +53,7 @@
 
 <script>
 // import { VueCropper } from 'vue-cropper'
+import { changeAvatar } from '@/api/user'
 
 export default {
   /*
@@ -97,14 +99,28 @@ export default {
       this.close()
     },
     okHandel () {
-      const vm = this
+      const _this = this
 
-      vm.confirmLoading = true
-      setTimeout(() => {
-        vm.confirmLoading = false
-        vm.close()
-        vm.$message.success('上传头像成功')
-      }, 2000)
+      _this.$refs.cropper.getCropBlob((data) => {
+        // outputType="png"
+        const avatar = new File([data], 'abc.png')
+        var fd = new FormData()
+        fd.append('avatar', avatar)
+
+        _this.confirmLoading = true
+        setTimeout(() => {
+          _this.confirmLoading = false
+          changeAvatar(fd)
+            .then(res => {
+              _this.$message.success('上传成功')
+              _this.$emit('changeAvatar', res.avatar)
+              _this.close()
+            })
+            .catch(err => {
+              _this.$message.error('上传失败: ', err)
+            })
+        }, 1500)
+      })
     },
     realTime (data) {
       this.previews = data
@@ -113,8 +129,17 @@ export default {
       return false
     },
     handleChange (info) {
-      console.log(info.file)
-      this.options.img = info.file.url
+      var data = window.URL.createObjectURL(info.file)
+      this.options.img = data
+      // var reader = new FileReader()
+      // reader.readAsDataURL(info.file)
+    }
+  },
+  watch: {
+    visible (newVal, oldVal) {
+      if (newVal === false) {
+        this.options.img = this.avatar
+      }
     }
   },
   mounted () {

@@ -8,3 +8,7 @@ export const getUsers = () => {
 export const getUser = (username) => {
   return axios.get(`${api.User}${username}/`)
 }
+
+export const changeAvatar = (data) => {
+  return axios.post(`${api.User}change-avatar/`, data)
+}

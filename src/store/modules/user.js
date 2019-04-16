@@ -24,6 +24,9 @@ const user = {
       state.username = user.username
       state.realname = user.realname
       state.avatar = user.avatar
+    },
+    SET_AVATAR: (state, avatar) => {
+      state.avatar = avatar
     }
     // SET_NAME: (state, { name, welcome }) => {
     //   state.name = name
