@@ -282,14 +282,16 @@ export default {
     }
   },
   async mounted () {
-    await this.InitLoginStatus()
-    if (this.loginStatus()) {
-      this.$notification.success({
-        message: '你已经登录了',
-        description: `${welcome()}`
-      })
-      this.$router.push({ name: 'account' })
-    }
+    // 此功能已经在 '@/permission.js' 中实现了
+    //
+    // await this.InitLoginStatus()
+    // if (this.loginStatus()) {
+    //   this.$notification.success({
+    //     message: '你已经登录了',
+    //     description: `${welcome()}`
+    //   })
+    //   this.$router.push({ name: 'account' })
+    // }
   }
 }
 </script>

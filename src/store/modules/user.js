@@ -71,8 +71,7 @@ const user = {
             resolve(res)
           })
           .catch(err => {
-            // reject(err)  // 当token 错误时会在console中打印 vue warn
-            console.log(err)
+            reject(err) // 当token 错误时会在console中打印 vue warn
           })
       })
     },

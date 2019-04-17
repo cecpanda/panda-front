@@ -25,25 +25,13 @@ export const asyncRouterMap = [
         name: 'dashboard',
         redirect: '/dashboard/workplace',
         component: RouteView,
-        meta: { title: '仪表盘', keepAlive: true, icon: bxAnaalyse, permission: [ 'dashboard' ] },
+        meta: { title: '仪表盘', keepAlive: true, icon: bxAnaalyse },
         children: [
           {
             path: '/dashboard/analysis',
             name: 'Analysis',
             component: () => import('@/views/dashboard/Analysis'),
             meta: { title: '分析页', keepAlive: false, permission: [ 'dashboard' ] }
-          },
-          // 外部链接
-          // {
-          //   path: 'https://www.baidu.com/',
-          //   name: 'Monitor',
-          //   meta: { title: '监控页（外部）', target: '_blank' }
-          // },
-          {
-            path: '/dashboard/workplace',
-            name: 'Workplace',
-            component: () => import('@/views/dashboard/Workplace'),
-            meta: { title: '工作台', keepAlive: true, permission: [ 'dashboard' ] }
           }
         ]
       },
@@ -54,19 +42,19 @@ export const asyncRouterMap = [
         name: 'profile',
         component: RouteView,
         redirect: '/profile/basic',
-        meta: { title: '详情页', icon: 'profile', permission: [ 'profile' ] },
+        meta: { title: '详情页', icon: 'profile' },
         children: [
           {
             path: '/profile/basic',
             name: 'ProfileBasic',
             component: () => import('@/views/profile/basic/Index'),
-            meta: { title: '基础详情页', permission: [ 'profile' ] }
+            meta: { title: '基础详情页' }
           },
           {
             path: '/profile/advanced',
             name: 'ProfileAdvanced',
             component: () => import('@/views/profile/advanced/Advanced'),
-            meta: { title: '高级详情页', permission: [ 'profile' ] }
+            meta: { title: '高级详情页' }
           }
         ]
       },
@@ -78,7 +66,7 @@ export const asyncRouterMap = [
         redirect: '/account/center',
         hidden: true,
         name: 'account',
-        meta: { title: '个人页', icon: 'user', keepAlive: true, requireAuth: true },
+        meta: { title: '个人页', icon: 'user', keepAlive: true },
         children: [
           {
             path: 'center',
@@ -90,7 +78,7 @@ export const asyncRouterMap = [
             path: '/account/settings',
             name: 'settings',
             component: () => import('@/views/account/settings/Index'),
-            meta: { title: '个人设置', hideHeader: true, permission: [ 'user' ] },
+            meta: { title: '个人设置', hideHeader: true },
             redirect: '/account/settings/base',
             hideChildrenInMenu: true,
             children: [
@@ -98,31 +86,31 @@ export const asyncRouterMap = [
                 path: '/account/settings/base',
                 name: 'BaseSettings',
                 component: () => import('@/views/account/settings/BaseSetting'),
-                meta: { title: '基本设置', hidden: true, permission: [ 'user' ] }
+                meta: { title: '基本设置', hidden: true }
               },
               {
                 path: '/account/settings/security',
                 name: 'SecuritySettings',
                 component: () => import('@/views/account/settings/Security'),
-                meta: { title: '安全设置', hidden: true, keepAlive: true, permission: [ 'user' ] }
+                meta: { title: '安全设置', hidden: true, keepAlive: true }
               },
               {
                 path: '/account/settings/custom',
                 name: 'CustomSettings',
                 component: () => import('@/views/account/settings/Custom'),
-                meta: { title: '个性化设置', hidden: true, keepAlive: true, permission: [ 'user' ] }
+                meta: { title: '个性化设置', hidden: true, keepAlive: true }
               }
               // {
               //   path: '/account/settings/binding',
               //   name: 'BindingSettings',
               //   component: () => import('@/views/account/settings/Binding'),
-              //   meta: { title: '账户绑定', hidden: true, keepAlive: true, permission: [ 'user' ] }
+              //   meta: { title: '账户绑定', hidden: true, keepAlive: true }
               // },
               // {
               //   path: '/account/settings/notification',
               //   name: 'NotificationSettings',
               //   component: () => import('@/views/account/settings/Notification'),
-              //   meta: { title: '新消息通知', hidden: true, keepAlive: true, permission: [ 'user' ] }
+              //   meta: { title: '新消息通知', hidden: true, keepAlive: true }
               // }
             ]
           }
