@@ -23,7 +23,7 @@ const err = (error) => {
     if (error.response.status === 403) {
       notification.error({
         message: 'Forbidden',
-        description: data.message
+        description: data.detail
       })
     }
     if (error.response.status === 401) {
@@ -35,7 +35,7 @@ const err = (error) => {
         store.dispatch('Logout').then(() => {
           setTimeout(() => {
             window.location.reload()
-          }, 1500)
+          }, 1000)
         })
       }
       router.push({ name: 'login', query: { redirect: router.currentRoute.fullPath } })

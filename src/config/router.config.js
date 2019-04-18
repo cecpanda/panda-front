@@ -19,6 +19,36 @@ export const asyncRouterMap = [
         meta: { title: '首页' }
       },
 
+      {
+        path: '/department',
+        name: 'department',
+        meta: { title: '信息工程部', icon: 'robot' },
+        children: [
+          {
+            path: '/department/sys',
+            name: 'sys',
+            meta: { title: '运营系统科' },
+            children: [
+              {
+                path: '/department/sys/tft',
+                name: 'tft',
+                meta: { title: 'TFT' }
+              },
+              {
+                path: '/department/sys/lcd',
+                name: 'lcd',
+                meta: { title: 'LCD' }
+              }
+            ]
+          },
+          {
+            path: '/department/eq',
+            name: 'eq',
+            meta: { title: '运营设备科' }
+          }
+        ]
+      },
+
       // dashboard
       {
         path: '/dashboard',

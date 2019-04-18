@@ -50,7 +50,7 @@ const user = {
   },
 
   actions: {
-    // 登录
+    // 登录0
     Login ({ commit }, userInfo) {
       return new Promise((resolve, reject) => {
         login(userInfo).then(res => {
