@@ -61,7 +61,7 @@ export const asyncRouterMap = [
             path: '/dashboard/analysis',
             name: 'Analysis',
             component: () => import('@/views/dashboard/Analysis'),
-            meta: { title: '分析页', keepAlive: false, permission: [ 'dashboard' ] }
+            meta: { title: '分析页', keepAlive: false }
           }
         ]
       },
@@ -70,7 +70,7 @@ export const asyncRouterMap = [
       {
         path: '/profile',
         name: 'profile',
-        component: RouteView,
+        component: BasicLayout,
         redirect: '/profile/basic',
         meta: { title: '详情页', icon: 'profile' },
         children: [
@@ -150,7 +150,7 @@ export const asyncRouterMap = [
     ]
   },
   {
-    path: '*', redirect: '/404', hidden: true
+    path: '*', redirect: '/error/404', hidden: true
   }
 ]
 
@@ -196,9 +196,20 @@ export const constantRouterMap = [
   //   ]
   // },
 
+  // {
+  //   path: '/404',
+  //   component: () => import(/* webpackChunkName: "fail" */ '@/views/exception/404')
+  // },
+
   {
-    path: '/404',
-    component: () => import(/* webpackChunkName: "fail" */ '@/views/exception/404')
+    path: '/error',
+    component: BasicLayout,
+    children: [
+      {
+        path: '/error/404',
+        component: () => import(/* webpackChunkName: "fail" */ '@/views/exception/404')
+      }
+    ]
   }
 
 ]

@@ -5,10 +5,11 @@ import { welcome } from '@/utils/util'
 
 const user = {
   state: {
-    token: '', // 为什么刷新后 state.token 还在？因为 bootstrap()
+    token: '',
     username: '',
     realname: '',
-    avatar: ''
+    avatar: '',
+    menu: []
     // name: '',
     // welcome: '',
     // avatar: '',
@@ -27,6 +28,9 @@ const user = {
     },
     SET_AVATAR: (state, avatar) => {
       state.avatar = avatar
+    },
+    SET_MENU: (state, menu) => {
+      state.menu = menu
     }
     // SET_NAME: (state, { name, welcome }) => {
     //   state.name = name
@@ -68,6 +72,7 @@ const user = {
         getInfo2()
           .then(res => {
             commit('SET_USER', res)
+            commit('SET_MENU', res.menu)
             resolve(res)
           })
           .catch(err => {

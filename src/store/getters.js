@@ -25,7 +25,8 @@ const getters = {
       realname: state.user.realname,
       avatar: state.user.avatar
     }
-  }
+  },
+  menu: state => state.user.menu
 }
 
 export default getters
