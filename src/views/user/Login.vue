@@ -258,6 +258,7 @@ export default {
           // values.password = md5(values.password)
           Login(values)
             .then((res) => {
+              console.log(res)
               this.$router.push({ name: 'index' })
               // 延迟 1 秒显示欢迎信息
               setTimeout(() => {

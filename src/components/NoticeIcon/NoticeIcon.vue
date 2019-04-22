@@ -12,7 +12,8 @@
       <a-spin :spinning="loadding">
         <a-tabs>
           <a-tab-pane tab="通知" key="1">
-            <a-list>
+            123
+            <!-- <a-list>
               <a-list-item>
                 <a-list-item-meta title="你收到了 14 份新周报" description="一年前">
                   <a-avatar style="background-color: white" slot="avatar" src="https://gw.alipayobjects.com/zos/rmsportal/ThXAXghbEsBCCSDihZxY.png"/>
@@ -28,7 +29,7 @@
                   <a-avatar style="background-color: white" slot="avatar" src="https://gw.alipayobjects.com/zos/rmsportal/kISTdvpyTAhtGxpovNWd.png"/>
                 </a-list-item-meta>
               </a-list-item>
-            </a-list>
+            </a-list> -->
           </a-tab-pane>
           <a-tab-pane tab="消息" key="2">
             123

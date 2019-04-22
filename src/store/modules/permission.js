@@ -1,11 +1,30 @@
 import { asyncRouterMap, constantRouterMap } from '@/config/router.config'
 
+// menu 中的元素是 or 的关系
+// function isMenu (route, menu) {
+//   if (route.meta && route.meta.menu) {
+//     if (route.meta.menu.length) {
+//       for (const m of menu) {
+//         if (route.meta.menu.includes(m)) {
+//           return true
+//         }
+//       }
+//     } else {
+//       return true // menu: [], 表示没有 menu 要求
+//     }
+//     return false
+//   }
+//   return true
+// }
+
+// menu 中的元素是 and 的关系
 function isMenu (route, menu) {
   if (route.meta && route.meta.menu) {
-    for (const m of menu) {
-      if (route.meta.menu.includes(m)) {
-        return true
-      }
+    const yes = route.meta.menu.every(value => {
+      return menu.includes(value)
+    })
+    if (yes) {
+      return true
     }
     return false
   }
@@ -28,7 +47,7 @@ function filterAsyncRouter (routerMap, menu) {
 const permission = {
   state: {
     routers: constantRouterMap,
-    addRputers: []
+    addRouters: []
   },
   mutations: {
     SET_ROUTERS: (state, routers) => {

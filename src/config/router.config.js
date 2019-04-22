@@ -1,6 +1,5 @@
 // eslint-disable-next-line
 import { UserLayout, BasicLayout, RouteView, BlankLayout, PageView } from '@/layouts'
-import { bxAnaalyse } from '@/core/icons'
 
 export const asyncRouterMap = [
 
@@ -19,72 +18,91 @@ export const asyncRouterMap = [
         meta: { title: '首页' }
       },
 
+      // 信息工程部, for manager
       {
-        path: '/department',
-        name: 'department',
-        meta: { title: '信息工程部', icon: 'robot' },
+        path: '/it',
+        name: 'it',
+        meta: { title: '信息工程部', icon: 'robot', menu: ['it', 'manager'] },
         children: [
           {
-            path: '/department/sys',
-            name: 'sys',
+            path: '/it/sys',
+            name: 'it-sys',
             meta: { title: '运营系统科' },
             children: [
               {
-                path: '/department/sys/tft',
-                name: 'tft',
+                path: '/it/sys/tft',
+                name: 'it-sys-tft',
                 meta: { title: 'TFT' }
               },
               {
-                path: '/department/sys/lcd',
-                name: 'lcd',
+                path: '/it/sys/lcd',
+                name: 'it-sys-lcd',
                 meta: { title: 'LCD' }
               }
             ]
           },
           {
-            path: '/department/eq',
-            name: 'eq',
+            path: '/it/eq',
+            name: 'it-eq',
             meta: { title: '运营设备科' }
           }
         ]
       },
 
-      // dashboard
+      // 运营系统科, for department leader or room leader
       {
-        path: '/dashboard',
-        name: 'dashboard',
-        redirect: '/dashboard/workplace',
-        component: RouteView,
-        meta: { title: '仪表盘', keepAlive: true, icon: bxAnaalyse },
+        path: '/it-sys',
+        name: 'it-sys1',
+        meta: { title: '运营系统科', icon: 'robot', menu: ['it-sys', 'leader'] },
         children: [
           {
-            path: '/dashboard/analysis',
-            name: 'Analysis',
-            component: () => import('@/views/dashboard/Analysis'),
-            meta: { title: '分析页', keepAlive: false }
+            path: '/it-sys/tft',
+            name: 'it-sys-tft1',
+            meta: { title: 'TFT' }
+          },
+          {
+            path: '/it-sys/lcd',
+            name: 'it-sys-lcd1',
+            meta: { title: 'LCD' }
           }
         ]
       },
 
-      // profile
+      // 运营设备科
       {
-        path: '/profile',
-        name: 'profile',
-        component: BasicLayout,
-        redirect: '/profile/basic',
-        meta: { title: '详情页', icon: 'profile' },
+        path: '/it-eq',
+        name: 'it-eq1',
+        meta: { title: '运营设备科', icon: 'robot', menu: ['it-eq', 'leader'] }
+      },
+
+      // for members
+      {
+        path: '/it-sys-tft',
+        name: 'it-sys-tft2',
+        meta: { title: 'TFT', icon: 'robot', menu: ['it-sys-tft', 'member'] }
+      },
+
+      {
+        path: '/it-sys-lcd',
+        name: 'it-sys-lcd2',
+        meta: { title: 'LCD', icon: 'robot', menu: ['it-sys-lcd', 'member'] }
+      },
+
+      // 阵列制造部
+      {
+        path: '/tft',
+        name: 'tft',
+        meta: { title: '阵列制造部', icon: 'robot', menu: ['tft', 'a-leader'] },
         children: [
           {
-            path: '/profile/basic',
-            name: 'ProfileBasic',
-            component: () => import('@/views/profile/basic/Index'),
-            meta: { title: '基础详情页' }
+            path: '/tft/cvd',
+            name: 'tft-cvd',
+            meta: { title: 'CVD', icon: 'robot', menu: ['tft-cvd'] }
           },
           {
-            path: '/profile/advanced',
-            name: 'ProfileAdvanced',
-            component: () => import('@/views/profile/advanced/Advanced'),
-            meta: { title: '高级详情页' }
+            path: '/tft/pho',
+            name: 'tft-pho',
+            meta: { title: '曝光', icon: 'robot', menu: ['tft-pho'] }
           }
         ]
       },

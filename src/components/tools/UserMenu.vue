@@ -94,8 +94,8 @@ export default {
       this.searchIcon = !this.searchIcon
     }
   },
-  mounted () {
-    // await this.InitLoginStatus()
+  async mounted () {
+    await this.InitLoginStatus()
     this.userInfo = this.user()
     // console.log('token: ', this.token())
     // console.log('loginstatus: ', this.loginStatus())
