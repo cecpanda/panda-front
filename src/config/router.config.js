@@ -22,16 +22,19 @@ export const asyncRouterMap = [
       {
         path: '/it',
         name: 'it',
+        component: RouteView,
         meta: { title: '信息工程部', icon: 'robot', menu: ['it', 'manager'] },
         children: [
           {
             path: '/it/sys',
             name: 'it-sys',
+            component: RouteView,
             meta: { title: '运营系统科' },
             children: [
               {
                 path: '/it/sys/tft',
                 name: 'it-sys-tft',
+                component: () => import('@/views/it/sys/Tft'),
                 meta: { title: 'TFT' }
               },
               {
@@ -92,7 +95,7 @@ export const asyncRouterMap = [
       {
         path: '/tft',
         name: 'tft',
-        meta: { title: '阵列制造部', icon: 'robot', menu: ['tft', 'a-leader'] },
+        meta: { title: '阵列制造部', icon: 'robot', menu: ['tft', 'manager'] },
         children: [
           {
             path: '/tft/cvd',

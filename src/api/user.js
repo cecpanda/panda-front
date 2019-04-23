@@ -20,3 +20,7 @@ export const changeProfile = (data) => {
 export const changePassword = (data) => {
   return axios.post(`${api.User}change-password/`, data)
 }
+
+export const getPermission = (data) => {
+  return axios.post(`${api.User}get-permission/`, data)
+}

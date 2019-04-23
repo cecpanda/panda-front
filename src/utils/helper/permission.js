@@ -1,3 +1,5 @@
+// import { getPermission } from '@/api/user'
+
 const PERMISSION_ENUM = {
   'add': { key: 'add', label: '新增' },
   'delete': { key: 'delete', label: '删除' },
@@ -28,6 +30,16 @@ function plugin (Vue) {
             return val === action
           })
           return false
+        }
+      }
+    }
+  })
+
+  !Vue.prototype.$action && Object.defineProperties(Vue.prototype, {
+    $action: {
+      get () {
+        return (action, service) => {
+
         }
       }
     }

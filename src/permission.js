@@ -1,3 +1,4 @@
+import Vue from 'vue'
 import router from './router'
 import store from './store'
 
@@ -6,6 +7,7 @@ import 'nprogress/nprogress.css' // progress bar style
 import notification from 'ant-design-vue/es/notification'
 import { timeFix, welcome } from '@/utils/util'
 import { setDocumentTitle, domTitle } from '@/utils/domUtil'
+import { getPermission } from '@/api/user'
 
 NProgress.configure({ speed: 200, showSpinner: false }) // NProgress Configuration
 
@@ -64,10 +66,10 @@ router.beforeEach(async (to, from, next) => {
       })
   }
 
-  console.log('---------------------------')
+  // console.log('---------------------------')
   // console.log('to: ', to)
   // console.log(store.getters.user)
-  console.log(store.getters.loginStatus)
+  // console.log(store.getters.loginStatus)
 
   if (store.getters.loginStatus) {
     if (to.name === 'login') {
@@ -93,3 +95,29 @@ router.beforeEach(async (to, from, next) => {
 router.afterEach(() => {
   NProgress.done() // finish progress bar
 })
+
+const action = Vue.directive('action', {
+  bind: function (el, binding, vnode) {
+    const data = {
+      action: binding.arg,
+      app: binding.value.app,
+      service: binding.value.service
+    }
+    getPermission(data)
+      .then(res => {
+        if (!res.allowed) {
+          el.parentNode && el.parentNode.removeChild(el) || (el.style.display = 'none')
+        }
+      })
+      .catch(() => {
+        el.parentNode && el.parentNode.removeChild(el) || (el.style.display = 'none')
+      })
+  }
+})
+
+const services = {
+  'ItSysTft': { app: 'it-sys', service: 'it-sys-tft' },
+  'ItSysLcd': { app: 'it-sys', service: 'it-sys-lcd' }
+}
+
+export { action, services }
