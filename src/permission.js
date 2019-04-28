@@ -18,7 +18,11 @@ const whiteList = [
   'home',
   'login',
   'register',
-  'registerResult'
+  'registerResult',
+  'docs',
+  'docs-it-sys',
+  'docs-it-sys-titan-check',
+  'docs-it-sys-titan-protocol'
 ]
 
 var isInited = false

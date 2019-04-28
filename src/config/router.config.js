@@ -110,6 +110,50 @@ export const asyncRouterMap = [
         ]
       },
 
+      // docs
+      {
+        path: '/docs',
+        name: 'docs',
+        component: RouteView,
+        meta: { title: '文档中心', icon: 'file-markdown' },
+        children: [
+          {
+            path: '/docs/it',
+            name: 'docs-it',
+            component: RouteView,
+            meta: { title: '信息工程部' },
+            children: [
+              {
+                path: '/docs/it/sys',
+                name: 'docs-it-sys',
+                component: () => import('@/views/docs/it/sys/Index'),
+                meta: { title: '运营系统科' }
+              },
+              {
+                path: '/docs/it/sys/titan',
+                component: () => import('@/views/docs/Docs'),
+                hidden: true,
+                meta: { title: 'TITAN' },
+                children: [
+                  {
+                    path: '/docs/it/sys/titan/check',
+                    name: 'docs-it-sys-titan-check',
+                    component: () => import('@/components/Docs/it/sys/titan/check/index.md'),
+                    meta: { title: 'TITAN-点检手册' }
+                  },
+                  {
+                    path: '/docs/it/sys/titan/protocol',
+                    name: 'docs-it-sys-titan-protocol',
+                    component: () => import('@/views/docs/it/sys/titan/protocol.vue'),
+                    meta: { title: 'TITAN-通信式样书' }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+
       // account
       {
         path: '/account',

@@ -1,0 +1,23 @@
+<svg width="464" height="464" xmlns="http://www.w3.org/2000/svg">
+
+ <g>
+  <title>background</title>
+  <rect fill="none" id="canvas_background" height="458" width="458.0001" y="-1" x="-1"/>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <path id="svg_1" fill="#ffc477" d="m352,0l0,368l-304,0c-26.476562,0.082031 -47.917969,21.523438 -48,48l0,-368c0,-26.507812 21.492188,-48 48,-48l304,0zm0,0"/>
+  <path id="svg_2" fill="#ffb655" d="m352,0l0,368l-299.121094,0c112.320313,-54.398438 243.28125,-160.800781 298.480469,-368l0.640625,0zm0,0"/>
+  <path id="svg_3" fill="#787680" d="m48,368c-26.507812,0 -48,21.492188 -48,48c0.039063,26.492188 21.507812,47.960938 48,48l288,0l0,-96l-288,0zm0,0"/>
+  <path id="svg_4" fill="#57565c" d="m336,368l0,16l-288,0c-23.417969,-0.007812 -43.410156,16.90625 -47.28125,40c-0.484375,-2.640625 -0.722656,-5.316406 -0.71875,-8c0,-26.507812 21.492188,-48 48,-48l288,0zm0,0"/>
+  <path id="svg_5" fill="#ff6243" d="m272,72l32,24l0,-96l-64,0l0,96l32,-24zm0,0"/>
+  <path id="svg_6" fill="#bcbec0" d="m112,128l192,0l0,80l-192,0l0,-80zm0,0"/>
+  <path id="svg_7" fill="#3e3d42" d="m48,408l288,0l0,16l-288,0l0,-16zm0,0"/>
+  <path id="svg_8" fill="#ffa733" d="m56,0l16,0l0,336l-16,0l0,-336zm0,0"/>
+  <g id="svg_9" fill="#a97c50">
+   <path id="svg_10" d="m144,248l128,0l0,16l-128,0l0,-16zm0,0"/>
+   <path id="svg_11" d="m112,296l192,0l0,16l-192,0l0,-16zm0,0"/>
+  </g>
+  <text stroke="null" transform="matrix(1.5145227909088135,0,0,2.063610315322876,-151.26970052719116,-153.01031520590186) " stroke-dasharray="2,2" xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="24" id="svg_12" y="165.205754" x="174.820549" fill-opacity="null" stroke-opacity="null" stroke-width="0" fill="#000000">通信式样书</text>
+ </g>
+</svg>

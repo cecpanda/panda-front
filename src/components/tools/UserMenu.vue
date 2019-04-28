@@ -37,9 +37,9 @@
         </a-dropdown>
       </template>
 
-      <a href="/user/login" v-else>
+      <router-link :to="{ name: 'login' }" v-else>
         <span class="action"><a-icon type="login" style="font-size: 1.5em"/></span>
-      </a>
+      </router-link>
 
     </div>
   </div>
