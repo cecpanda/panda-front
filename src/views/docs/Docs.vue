@@ -16,3 +16,37 @@ export default {
   name: 'Docs'
 }
 </script>
+
+<style lang='stylus'>
+.content
+  h1
+    font-size 35px
+    font-weight bold
+  h2
+    font-size 30px
+    font-weight bold
+  h3
+    font-size 26px
+    font-weight bold
+  h4
+    font-size 22px
+    font-weight bold
+  h5
+    font-size 19px
+    font-weight bold
+  h6
+    font-size 16px
+    font-weight bold
+.table-of-contents
+  border-top 1px dashed #000
+  border-left 1px dashed #000
+  position fixed
+  ul
+    list-style none
+    margin 0
+    padding .2em 1em
+    li
+      font-size 1em
+      a
+        color #536D88
+</style>

@@ -75,7 +75,11 @@ module.exports = {
       .loader('vue-markdown-loader/lib/markdown-compiler')
       .options({
         raw: true,
-        wrapper: 'article'
+        wrapper: 'article',
+        use: [
+          [require("markdown-it-anchor"), {  }],
+          [require("markdown-it-toc-done-right"), { level: 1, listType: 'ul' } ]
+        ]
       })
   },
 
