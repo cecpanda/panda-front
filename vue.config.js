@@ -78,7 +78,7 @@ module.exports = {
         wrapper: 'article',
         use: [
           [require("markdown-it-anchor"), {  }],
-          [require("markdown-it-toc-done-right"), { level: 1, listType: 'ul' } ]
+          [require("markdown-it-toc-done-right"), { level: 2, listType: 'ul' } ]
         ]
       })
   },

@@ -11,22 +11,41 @@
       <li></li>
       <li></li>
     </ul>
-    <a-row>
-      <a-col :span="4" class="title">TITAN</a-col>
-      <a-col :span="20">
-        <a-col :span="6">
-          <router-link :to="{ name: 'docs-it-sys-titan-check' }">
-            <img src="@/components/Docs/it/sys/titan/check/cover.svg" alt="" class="cover">
-          </router-link>
-        </a-col>
-        <a-col :span="6">
-          <router-link :to="{ name: 'docs-it-sys-titan-protocol' }">
-            <img src="@/components/Docs/it/sys/titan/protocol/cover.svg" alt="" class="cover">
-          </router-link>
-        </a-col>
 
+    <a-row :gutter="30" class="group">
+      <a-col :span="3" class="title">TITAN</a-col>
+      <a-col :span="21">
+        <a-tabs defaultActiveKey="1" tabPosition="left">
+          <a-tab-pane tab="普通文档" key="1">
+            <a-col :span="6">
+              <router-link :to="{ name: 'docs-it-sys-titan-check' }">
+                <img src="@/components/Docs/it/sys/titan/check/cover.svg" alt="" class="cover">
+              </router-link>
+            </a-col>
+            <a-col :span="6">
+              <router-link :to="{ name: 'docs-it-sys-titan-protocol' }">
+                <img src="@/components/Docs/it/sys/titan/protocol/cover.svg" alt="" class="cover">
+              </router-link>
+            </a-col>
+            <a-col :span="6">
+              <img src="@/components/Docs/it/sys/titan/sl/cover.svg" alt="" class="cover">
+            </a-col>
+            <a-col :span="6">
+              <router-link :to="{ name: 'docs-it-sys-titan-lantern' }">
+                <img src="@/components/Docs/it/sys/titan/lantern/cover.svg" alt="" class="cover">
+              </router-link>
+            </a-col>
+          </a-tab-pane>
+          <a-tab-pane tab="异常处理" key="2">
+
+          </a-tab-pane>
+          <a-tab-pane tab="管理员" key="3">
+
+          </a-tab-pane>
+        </a-tabs>
       </a-col>
     </a-row>
+
   </div>
 </template>
 
@@ -37,6 +56,10 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+.group
+  margin 20px 0
+  padding 20px 0
+  border-top 1px dashed #000
 .title
   font-size 2.5em
   font-weight bold

@@ -1,0 +1,30 @@
+<svg width="463" height="464" xmlns="http://www.w3.org/2000/svg">
+
+ <g>
+  <title>background</title>
+  <rect fill="none" id="canvas_background" height="458" width="458.0001" y="-1" x="-1"/>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <path id="svg_1" fill="#c49a6c" d="m64.5,0l288,0l0,368l-288,0l0,-368zm0,0"/>
+  <path id="svg_2" fill="#8b5e3c" d="m48.5,368l16,0l0,-368l-16,0c-26.507812,0 -48,21.492188 -48,48l0,368c0,-26.507812 21.492188,-48 48,-48zm0,0"/>
+  <path id="svg_3" fill="#787680" d="m64.5,368l-16,0c-26.507812,0 -48,21.492188 -48,48c0.039062,26.492188 21.507812,47.960938 48,48l304,0l0,-96l-288,0zm0,0"/>
+  <path id="svg_4" fill="#57565c" d="m352.5,368l0,16l-304,0c-23.417969,-0.007812 -43.410156,16.90625 -47.28125,40c-0.484375,-2.640625 -0.722656,-5.316406 -0.71875,-8c0,-26.507812 21.492188,-48 48,-48l304,0zm0,0"/>
+  <path id="svg_5" fill="#a97c50" d="m352.5,0l0,368l-278.640625,0c104.960937,-62.320312 215.199219,-172.878906 260,-368l18.640625,0zm0,0"/>
+  <path id="svg_6" fill="#d1d3d4" d="m112.5,80l192,0l0,80l-192,0l0,-80zm0,0"/>
+  <path id="svg_7" fill="#ff5023" d="m352.5,48l0,64l80,0l-16,-32l16,-32l-80,0zm0,0"/>
+  <path id="svg_8" fill="#ffd422" d="m432.5,208l-16,-32l16,-32l-80,0l0,64l80,0zm0,0"/>
+  <path id="svg_9" fill="#0b7" d="m432.5,304l-16,-32l16,-32l-80,0l0,64l80,0zm0,0"/>
+  <path id="svg_10" fill="#e6481f" d="m352.5,48l16,0l0,64l-16,0l0,-64zm0,0"/>
+  <path id="svg_11" fill="#e6bf1f" d="m352.5,144l16,0l0,64l-16,0l0,-64zm0,0"/>
+  <path id="svg_12" fill="#00a166" d="m352.5,240l16,0l0,64l-16,0l0,-64zm0,0"/>
+  <path id="svg_13" fill="#3e3d42" d="m48.5,408l304,0l0,16l-304,0l0,-16zm0,0"/>
+  <g id="svg_14" fill="#754c29">
+   <path id="svg_15" d="m56.5,0l16,0l0,368l-16,0l0,-368zm0,0"/>
+   <path id="svg_16" d="m144.5,200l128,0l0,16l-128,0l0,-16zm0,0"/>
+   <path id="svg_17" d="m112.5,248l192,0l0,16l-192,0l0,-16zm0,0"/>
+  </g>
+  <text stroke="null" transform="matrix(1.8620712071589764,0,0,2.7199238977106006,-130.84400779795743,-144.0928826425839) " xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="24" id="svg_18" y="104.55845" x="136.037176" fill-opacity="null" stroke-opacity="null" stroke-width="0" fill="#000000">阵列停机</text>
+  <text stroke="null" transform="matrix(2.380553722381592,0,0,2.357020139694214,-211.22471952438354,-257.64299558475614) " xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="24" id="svg_19" y="246.904296" x="151.73979" fill-opacity="null" stroke-opacity="null" stroke-width="0" fill="#000000">管理</text>
+ </g>
+</svg>

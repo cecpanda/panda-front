@@ -127,27 +127,43 @@ export const asyncRouterMap = [
                 path: '/docs/it/sys',
                 name: 'docs-it-sys',
                 component: () => import('@/views/docs/it/sys/Index'),
-                meta: { title: '运营系统科' }
+                meta: { title: '运营系统科', keepAlive: true }
+              }
+            ]
+          }
+        ]
+      },
+
+      {
+        path: '/docs/detail',
+        name: 'docs-detail',
+        component: RouteView,
+        hidden: true,
+        meta: { title: 'Docs' },
+        children: [
+          {
+            path: '/docs/it/sys/titan',
+            name: 'docs-it-sys-titan',
+            component: () => import('@/views/docs/Docs'),
+            meta: { },
+            children: [
+              {
+                path: '/docs/it/sys/titan/check',
+                name: 'docs-it-sys-titan-check',
+                component: () => import('@/components/Docs/it/sys/titan/check/index.md'),
+                meta: { title: 'TITAN-点检手册', menu: [] }
               },
               {
-                path: '/docs/it/sys/titan',
-                component: () => import('@/views/docs/Docs'),
-                hidden: true,
-                meta: { title: 'TITAN' },
-                children: [
-                  {
-                    path: '/docs/it/sys/titan/check',
-                    name: 'docs-it-sys-titan-check',
-                    component: () => import('@/components/Docs/it/sys/titan/check/index.md'),
-                    meta: { title: 'TITAN-点检手册' }
-                  },
-                  {
-                    path: '/docs/it/sys/titan/protocol',
-                    name: 'docs-it-sys-titan-protocol',
-                    component: () => import('@/views/docs/it/sys/titan/protocol.vue'),
-                    meta: { title: 'TITAN-通信式样书' }
-                  }
-                ]
+                path: '/docs/it/sys/titan/protocol',
+                name: 'docs-it-sys-titan-protocol',
+                component: () => import('@/views/docs/it/sys/titan/protocol.vue'),
+                meta: { title: 'TITAN-通信式样书' }
+              },
+              {
+                path: '/docs/it/sys/titan/lantern',
+                name: 'docs-it-sys-titan-lantern',
+                component: () => import('@/components/Docs/it/sys/titan/lantern/index.md'),
+                meta: { title: '阵列停机管理系统' }
               }
             ]
           }

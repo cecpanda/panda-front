@@ -55,6 +55,7 @@
           </div>
         </a-card>
       </a-col>
+
       <a-col :md="24" :lg="17">
         <!-- <a-card
           style="width:100%"
