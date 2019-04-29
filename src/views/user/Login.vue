@@ -108,7 +108,6 @@
           :to="{ name: 'register' }"
         >注册账户</router-link>
       </div>
-
     </a-form>
   </div>
 </template>

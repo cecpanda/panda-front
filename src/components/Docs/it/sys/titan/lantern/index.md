@@ -109,7 +109,7 @@
 - 权限：`添加：复机单`
 
 </a-col>
-<a-col :md="8" :lg="4" class="toc">
+<a-col :md="8" :lg="4">
 
 [toc]
 

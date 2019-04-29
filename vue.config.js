@@ -78,7 +78,17 @@ module.exports = {
         wrapper: 'article',
         use: [
           [require("markdown-it-anchor"), {  }],
-          [require("markdown-it-toc-done-right"), { level: 2, listType: 'ul' } ]
+          [require("markdown-it-toc-done-right"), 
+            { 
+              level: 2,
+              listType: 'ul',
+              containerClass: 'toc',
+              // containerClass: 'ant-anchor-wrapper',
+              // listClass: 'ant-anchor',
+              // itemClass: 'ant-anchor-link',
+              // linkClass: 'ant-anchor-link-title'
+            }
+          ]
         ]
       })
   },

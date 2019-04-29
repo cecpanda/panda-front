@@ -13,10 +13,7 @@ export default {
 }
 */
 export default {
-  name: 'Docs',
-  updated () {
-    console.log()
-  }
+  name: 'Docs'
 }
 </script>
 
@@ -42,16 +39,19 @@ export default {
     font-weight bold
   p
     font-size 20px
-.table-of-contents
+.toc
+  max-width 90%
   border-top 1px dashed #000
   border-left 1px dashed #000
   position fixed
+  // bottom 20%
   ul
     list-style none
     margin 0
     padding .2em 1em
     li
       font-size 1em
+      padding .1em 0
       a
         color #536D88
 </style>
