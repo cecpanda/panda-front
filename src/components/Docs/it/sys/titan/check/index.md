@@ -266,11 +266,10 @@ total 1264
 -rw-rw----   1 titann1    mail         55203 Apr  6 11:00 titann1
 ```
 
-
 </a-col>
 <a-col :md="8" :lg="4">
 
 [toc]
 
+</transition>
 </a-col>
-

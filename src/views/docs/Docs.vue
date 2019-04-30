@@ -3,6 +3,7 @@
 </template>
 
 <script>
+// import 'animate.css'
 import 'highlight.js/styles/github.css'
 import 'github-markdown-css'
 /*
