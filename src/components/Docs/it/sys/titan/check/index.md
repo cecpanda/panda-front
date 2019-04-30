@@ -21,28 +21,32 @@ Titan 有 6 台生产服务器，1 台开发机:
 |EQ4|tn1s006|10.53.144.6|
 |QC1|tn1s001|10.53.144.17|
 |QC2|tn1s002|10.53.144.18|
-|DEV|tn1G001|10.53.144.180|
+|DEV|tn1g001|10.53.144.180|
 
-> 点检账号：`titanchk/cimcheck`
+> 点检账号：`titanchk`，密码：`cimcheck`
 
 ## 插槽目视
 如果下面出现异常的话，有可能硬件出现问题:
 
-- LED 是否为无障碍状态？磁盘的话，请打开机箱前盖确认 LED 情况。
-- 确认 CPU 的 Attention ramp 是否闪烁。
+- `LED` 是否为无障碍状态？磁盘的话，请打开机箱前盖确认 `LED` 情况。
+- 确认 `CPU` 的 `Attention ramp` 是否闪烁。
+
+> 机房巡检人员点检此项
 
 ## 系统消息
 登录 `Titanlient`（账号`1`，密码：`11`），查看系统消息，注意错误日志和警告日志。
 
 
 ## CPU负载
-查看当前负载: 
+原则上不超过 `CPU` 的核心数，可作为参考：`EQ` 系列为 4 核、`QC` 系列 6 核。
+
+1. 查看当前负载: 
 ```bash
 (titanchk@tn1s002)101% uptime
  10:36am  up 186 days, 12:24,  5 users,  load average: 0.55, 0.50, 0.49
 ```
 
-查看过去一段时间内的负载（EQ3/EQ4 此脚本目前尚未启动）：
+2. 查看过去一段时间内的负载（EQ3/EQ4 此脚本目前尚未启动）：
 
 ```bash
 (titanchk@tn1s002)102% tail -100 /package/titann1/tool/eda_watch_shells/log/uptime.log
@@ -55,12 +59,17 @@ Titan 有 6 台生产服务器，1 台开发机:
 ```
 
 ## 磁盘使用
-其中：
 
-- `-i`：表示查看 `inode` 信息
-- `awk`：格式化打印，去掉后可以看到更详细信息
+需要应对的情况：
+
+- 磁盘或者 `inode` 的使用率突然增加（每日 `1%` 以上）
+- 磁盘或者 `inode` 的使用率近于危险状态，参照：
+
+![](./static/bdf.png)
+
 
 ```bash
+# 举个例子
 (titanchk@tn1s002)103% bdf -i | awk '{print $1 "    " $5 "    " $8}' | sort
 Filesystem    %used    %iuse
 /dev/vg00/lvol1    49%    2%
@@ -77,7 +86,16 @@ Filesystem    %used    %iuse
 /dev/vg01/lvol4    34%    1%
 ```
 
+其中：
+
+- `-i`：表示查看 `inode` 信息
+- `awk`：格式化打印，去掉后可以看到更详细信息
+- `lvol8` 容易达到警告值
+
 ## 文件残留
+用于显示调查TITAN目录，文件个数以及最终更新时间界面，参照：
+
+![](./static/dirwatch.png)
 
 ```bash
 (titanchk@tn1s002)105% dirwatch.sh
@@ -152,9 +170,9 @@ Directory Name                           File Num File Name                     
 
 ## lock文件
 
-- 忽略 qtrend，此功能未使用 
+- 忽略 `qtrend`，此功能未使用 
 - `lock` 文件是实时刷新的，如果当前存在，可以过一会再查看是否还有
-
+- 如果某 `lock` 文件长时间滞留，可能就会接到电话说其对应的装置查询或者下载不到数据，联系担当处理。
 
 ```bash
 (titanchk@tn1s002)106% ll /package/titann1/data/lock_file
@@ -165,7 +183,8 @@ total 0
 
 ## 进程确认
 
-- Normal 表示正常
+- `Normal` 表示正常
+- 异常情况：PID File (<进程名>.pid) is invalid. Process is not running.
 
 ```bash
 (titanchk@tn1s002)107% procchk.sh
@@ -188,6 +207,9 @@ TorajaSurvey_eq_tft   Feb 21  Normal
 ```
 
 ## 表空间
+参照：
+
+![](./static/tspace.png)
 
 ```bash
 (titanchk@tn1s002)108% tspace
@@ -237,6 +259,12 @@ tail -1000 syslog.log | grep 'cmcld'
 ```
 
 ## 簇和数据包
+需要切换至 `root` 账户，密码还记得吗？
+
+正常情况：
+
+- `STATUS`: `up`
+- `STATE`: `running`
 
 ```sh
 (titanchk@tn1s002)109% su -
@@ -258,6 +286,7 @@ tn1s002#[/]
 ```
 
 ## 维护邮件
+可作参考
 
 ```bash
 tn1s002#[/var/mail]ll /var/mail

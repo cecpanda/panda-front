@@ -238,7 +238,7 @@ export default {
             getSmsCaptcha({ mobile: values.mobile }).then(res => {
               setTimeout(hide, 2500)
               $notification['success']({
-                message: '提示',
+                message: '提示: 假的, 随便输入个验证码就行',
                 description: '验证码获取成功，您的验证码为：' + res.result.captcha,
                 duration: 8
               })

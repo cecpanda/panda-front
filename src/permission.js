@@ -22,7 +22,8 @@ const whiteList = [
   'docs',
   'docs-it-sys',
   'docs-it-sys-titan-check',
-  'docs-it-sys-titan-protocol'
+  'docs-it-sys-titan-protocol',
+  'docs-it-sys-titan-lantern'
 ]
 
 var isInited = false
