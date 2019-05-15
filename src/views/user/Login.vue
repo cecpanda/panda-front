@@ -94,6 +94,9 @@
 
       <div class="user-login-other">
         <span>预留登录方式</span>
+        <a href="https://github.com/login/oauth/authorize?client_id=623fe1214fda5d3587f5&allow_signup=false&login=titan">
+          <a-icon class="item-icon" type="github"></a-icon>
+        </a>
         <a>
           <a-icon class="item-icon" type="wechat"></a-icon>
         </a>
@@ -279,6 +282,10 @@ export default {
       setTimeout(() => {
         state.loginBtn = false
       }, 500)
+    },
+    // social login
+    handleGithub () {
+      this.$router.push({ path: 'https://github.com/login/oauth/authorize?client_id=623fe1214fda5d3587f5' })
     }
   },
   async mounted () {
