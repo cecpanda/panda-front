@@ -1,0 +1,23 @@
+<svg width="464" height="464" xmlns="http://www.w3.org/2000/svg">
+
+ <g>
+  <title>background</title>
+  <rect fill="none" id="canvas_background" height="402" width="582" y="-1" x="-1"/>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <path id="svg_1" fill="#ffc477" d="m352,0l0,368l-304,0c-26.47656,0.08203 -47.91797,21.52344 -48,48l0,-368c0,-26.50781 21.49219,-48 48,-48l304,0zm0,0"/>
+  <path id="svg_2" fill="#ffb655" d="m352,0l0,368l-299.12109,0c112.32031,-54.39844 243.28125,-160.80078 298.48047,-368l0.64062,0zm0,0"/>
+  <path id="svg_3" fill="#787680" d="m48,368c-26.50781,0 -48,21.49219 -48,48c0.03906,26.49219 21.50781,47.96094 48,48l288,0l0,-96l-288,0zm0,0"/>
+  <path id="svg_4" fill="#57565c" d="m336,368l0,16l-288,0c-23.41797,-0.00781 -43.41016,16.90625 -47.28125,40c-0.48438,-2.64062 -0.72266,-5.31641 -0.71875,-8c0,-26.50781 21.49219,-48 48,-48l288,0zm0,0"/>
+  <path id="svg_5" fill="#ff6243" d="m272,72l32,24l0,-96l-64,0l0,96l32,-24zm0,0"/>
+  <path id="svg_7" fill="#3e3d42" d="m48,408l288,0l0,16l-288,0l0,-16zm0,0"/>
+  <path id="svg_8" fill="#ffa733" d="m56,0l16,0l0,336l-16,0l0,-336zm0,0"/>
+  <g id="svg_9" fill="#a97c50">
+   <path id="svg_10" d="m144,248l128,0l0,16l-128,0l0,-16zm0,0"/>
+   <path id="svg_11" d="m112,296l192,0l0,16l-192,0l0,-16zm0,0"/>
+  </g>
+  <text stroke="#000" transform="matrix(2.63806089651263,0,0,3.587746005485278,-318.6917217465281,-494.3526623861306) " xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="24" id="svg_12" y="163.622192" x="143.225603" stroke-width="0" fill="#000000">TITAN</text>
+  <text stroke="#000" transform="matrix(1.8774967513171483,0,0,3.6379736606414954,-175.33603154757557,-506.40563203612425) " xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="24" id="svg_13" y="200.2024" x="134.883086" stroke-width="0" fill="#000000">集群操作手册</text>
+ </g>
+</svg>

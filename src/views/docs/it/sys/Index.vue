@@ -40,8 +40,18 @@
 
           </a-tab-pane>
           <a-tab-pane tab="管理员" key="3">
-
+            <a-col :span="6">
+              <router-link :to="{ name: 'docs-it-sys-titan-serviceguard' }">
+                <img src="@/components/Docs/it/sys/titan/serviceguard/cover.svg" alt="" class="cover">
+              </router-link>
+            </a-col>
+            <a-col :span="6">
+              <router-link :to="{ name: 'docs-it-sys-titan-pkg' }">
+                <img src="@/components/Docs/it/sys/titan/pkg/cover.svg" alt="" class="cover">
+              </router-link>
+            </a-col>
           </a-tab-pane>
+
         </a-tabs>
       </a-col>
     </a-row>

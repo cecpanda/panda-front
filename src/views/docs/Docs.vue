@@ -27,15 +27,19 @@ export default {
     font-size 35px
     font-weight bold
   h2
+    margin-top 50px
     font-size 32px
     font-weight bold
   h3
+    margin-top 30px
     font-size 28px
     font-weight bold
   h4
+    margin-top 20px
     font-size 24px
     font-weight bold
   h5
+    margin-top 10px
     font-size 23px
     font-weight bold
   h6

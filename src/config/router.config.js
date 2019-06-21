@@ -164,6 +164,18 @@ export const asyncRouterMap = [
                 name: 'docs-it-sys-titan-lantern',
                 component: () => import('@/components/Docs/it/sys/titan/lantern/index.md'),
                 meta: { title: '阵列停机管理系统' }
+              },
+              {
+                path: '/docs/it/sys/titan/serviceguard',
+                name: 'docs-it-sys-titan-serviceguard',
+                component: () => import('@/components/Docs/it/sys/titan/serviceguard/index.md'),
+                meta: { title: 'HP MC/ServiceGuard' }
+              },
+              {
+                path: '/docs/it/sys/titan/pkg',
+                name: 'docs-it-sys-titan-pkg',
+                component: () => import('@/components/Docs/it/sys/titan/pkg/index.md'),
+                meta: { title: 'TITAN 集群操作' }
               }
             ]
           }
