@@ -9,16 +9,30 @@
 
 <a-col :md="24" :lg="18" class="markdown-body">
 
-# TITAN 集群操作
+# TITAN EQ/QC 集群
+
+<!-- [toc]
+
+<br><br><br><br><br><br><br><br><br><br><br><br> -->
 
 ## 简介
 
+### 服务包一览
+
 ![](./static/pkg-index.png)
 
+### EQ-Titan
 
-> `EQ3` 和 `EQ4` 分别运行着 `Oracle`，并不是集群状态。`EQ1` 连接 `EQ3`，`EQ2` 连接 `EQ4`。
+![](./static/1.jpg) 
 
-## 命令操作
+
+> `EQ3` 和 `EQ4` 分别运行着 `Oracle`，实际上并不是集群状态。`EQ1` 连接 `EQ3`，`EQ2` 连接 `EQ4`。
+
+### QC-Titan
+
+![](./static/2.jpg) 
+
+## 常用操作
 
 ### 查询状态
 
@@ -42,9 +56,7 @@ EQ_TitanN1_cluster   up
 - 注意示例中的 `up`、`running`、`enabled`，表示正常状态 
 - 示例中表示 `pkg_eq` 运行在 `tn1s003`
 
-### cluster
-
-#### 启动
+### 启动 cluster
 
 当 `cluster` 中的所有 `node` 都启动后，再执行此操作（需要数分钟时间）。在启动时，未激活的 `node` 会被剔除。
 
@@ -54,7 +66,7 @@ cmruncl -v
 
 > 在当前 `TITAN` 系统中，基本上从来不需要运行此命令。`MC/SG` 随着开机关机而启动或停止。
 
-#### 停止
+### 停止 cluster
 
 ```bash
 cmhaltcl -v -f
@@ -66,7 +78,7 @@ cmhaltcl -v -f
 
 > 在当前 `TITAN` 系统中，也基本上从来不需要运行此命令。
 
-#### 添加节点
+### 添加节点
 
 启动节点的 `cluster` 进程，加入 `cluster`：
 
@@ -74,13 +86,13 @@ cmhaltcl -v -f
 cmrunnode -v hostname
 ```
 
-### package
+### 切换 package
 
-在发生已经定位到 `package` 的异常时，我们一般会通过切换 `package` 至另一个节点来恢复 `TITAN` 功能。这是我们在遇到集群问题时的常用操作，需要掌握。
+在发生已经定位到 `package` 的异常时，我们一般会通过切换 `package` 至另一个节点来恢复 `TITAN` 功能。
 
-这是一种需要付出一定代价的措施，<span class="warning">不是紧急情况，尽量避免使用</span>。切记，这不是常规操作，平均每年也用不到几次。
+这是一种需要付出一定代价的措施，<span class="warning">不是紧急情况，尽量避免使用</span>。
 
-<span class="warning">注意：</span>在一些极少的情况下，下面的命令并不一定每次都能完美的执行，在理解的情况下，根据错误提示随机应变。（`IP`信息、`VG`  等都有可能导致启动失败，这种情况虽然出现过，但较为少见。）
+<span class="warning">注意：</span>在一些极少的情况下，下面的命令并不一定每次都能完美的执行，在理解的情况下，根据错误提示随机应变。
 
 下面的命令在需要操作的 `cluster` 中的哪个节点执行都可以，执行前先确认状态。
 
@@ -117,11 +129,15 @@ cmrunnode -v hostname
     cmviewcl
     ```
 
-## Failover 详解
+---
 
-### 启动 package
+## Cluster & Package
 
-要搞懂 `Package` 的 `Failover` 机制，需要从 `Package` 的启动停止入手。我们以 `EQ` 集群中的 `pkg_eq` 为例（[`control_eq.sh`](/docs/static/control_eq.sh)）进行分析，以下仅代表我的个人理解，如有错误，敬请指出。
+我们以 `EQ` 的 `pkg_eq` 为例，分析 `MC/SG` 启动 `package` 的过程，继而可以对 `failover` 有更进一步的了解。
+
+### 启动
+
+查看 `pkg_eq` 的控制脚本[`control_eq.sh`](/docs/static/control_eq.sh)：
 
 1. 版本、磁盘检测等，由于 `HP-UX` 命令的关系，此脚本只向前兼容
 
@@ -134,8 +150,8 @@ cmrunnode -v hostname
     默认使用的激活命令如下：
     ```bash
     # 专有模式激活卷组
-    # - 未提供 vg_name，默认操作 `/etc/lvmtab` 和 `/etc/lvmtab_p`，如果指定 -c、-x、-Q、-R，则只对指定的某个卷组有效
-    # -a e 表示使卷组 availablity 
+    # 未提供 vg_name，默认操作 `/etc/lvmtab` 和 `/etc/lvmtab_p`，如果指定 -c、-x、-Q、-R，则只对指定的某个卷组有效
+    # -a e 表示使卷组 available
     # -a n 表示 deactive
     vgchange -a e
     ```
@@ -168,24 +184,38 @@ cmrunnode -v hostname
     - `srv_eq`：`pkg_eq` 的主程序
     - `mon_pkg_eq`：监控进程
 
-
-    > `SERVICE_RESTART[0]=""`，服务不会被重新自动
-
 9. 启动资源
 
-    启动延迟资源，在 `EQ` 集群中实际上什么也没做。
+    启动延迟资源，在 `EQ` 集群中实际上没有延迟资源。
 
-### 停止 package
+### 停止
 
-停止 Package 实际上就是上述步骤的反向操作。
+停止是上述步骤的反向操作。
 
-### Failover
+---
 
-工作节点宕机或主程 `srv_eq` 的终止等都会导致集群的 `failover`，这些是集群工具的常规操作，下面我们详解一下最近发生 `failover` 的原因。
+## Failover
 
-在启动 `package` 的过程中，还启动了一个服务 [`mon_pkg_eq`](/docs/static/mon_pkg_eq.sh)，下面就来解析下这个脚本。
+### Failover 的条件
 
-这个脚本的重点在 `187` 行开始：
+`Serviceguard` 的 `failover` 的原因可以分为两大类：`heartbeat` 传输问题和不满足 `package` 的 `up` 条件。
+
+1. `haertbeat` 传输失败有可能因为以下原因：
+
+    - 集群节点重启或断电
+    - `heartbeat` 网络连接异常
+    - `NODE_TIMEOUT` 设置
+    - 网络端口被禁止
+
+2. 不满足 `package` 的 `up` 条件：
+
+    - 节点无法管理包服务
+    - 包所依赖的网络子网已停止正常运行
+
+
+另外，因为 `EQ Cluster` 中的 `Titan` 应用和其对应的 `Oracle` 数据库部署在不同的服务器，当数据库出现异常时，`Titan` 应用也就毫无意义，而 `Oracle` 数据库不在 `MC/SG` 控制中。所以，`pkg_eq` 中还包含一个前面提到的监控服务 [`mon_pkg_eq`](/docs/static/mon_pkg_eq.sh)：
+
+从 `187` 行开始看：
 ```bash
 # .....省略......
   while true ; do
@@ -210,12 +240,22 @@ EOF
 # .....省略......
 ```
 
-每隔 `5s` 检测 `Oracle` 登录，如果遇到 `sqlplus` 错误，则终止循环，`trap` 捕捉信号，退出脚本。连续尝试三次仍无效后，`MC/SG` 决定是否 `Failover`。
+每隔 `5s` 检测 `Oracle` 登录，如果遇到 `sqlplus` 错误，则终止循环，`trap` 捕捉信号，退出脚本。连续尝试三次仍无效后，`MC/SG` 开始 `Failover`。
 
-> `Failover` 的发生看似简单，实际上 `MC/SG` 还是相当复杂的，请见 "
-HP MC/ServiceGuard"。
+> `6/15` 和 `6/16` 发生 `failover` 的原因即是如此。 
+
+### 6/15 失败调查
+
+`6/15 4:52` 发生了 `failover`，`package` 停止后但是未能在另一的节点上正常启动，
+
+HP IT 资源中心（`www.itrc.hp.com`）无法打开，看不到 `Serviceguard` 的发布记录。最终借助谷歌搜索到一篇文章，给出的回答如下图，猜测很有可能是 `package` 在 `failover` 之前或过程中被 `disable` 了，导致没有正常启动在另一节点上。
+
+> `6/16` 和 `6/21` 也发生相同的问题，`failover` 均成功。其中 `6/21` 的 `failover` 完美进行， 无任何影响，只是在日志中才看出。 
+
+![](./static/222.png)
 
 </a-col>
+
 <a-col :md="8" :lg="4">
 
 [toc]
