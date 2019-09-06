@@ -49,9 +49,9 @@ export default {
     font-size 20px
 .toc
   max-width 90%
-  border-top 1px dashed #000
-  border-left 1px dashed #000
-  position fixed
+  // border-top 1px dashed #000
+  // border-left 1px dashed #000
+  // position fixed
   // bottom 20%
   ul
     list-style none

@@ -176,6 +176,12 @@ export const asyncRouterMap = [
                 name: 'docs-it-sys-titan-pkg',
                 component: () => import('@/components/Docs/it/sys/titan/pkg/index.md'),
                 meta: { title: 'TITAN 集群操作' }
+              },
+              {
+                path: '/docs/it/sys/titan/monitor',
+                name: 'docs-it-sys-titan-monitor',
+                component: () => import('@/components/Docs/it/sys/titan/monitor/index.md'),
+                meta: { title: 'TITAN 监控系统' }
               }
             ]
           }

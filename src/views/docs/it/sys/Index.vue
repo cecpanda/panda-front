@@ -50,6 +50,11 @@
                 <img src="@/components/Docs/it/sys/titan/pkg/cover.svg" alt="" class="cover">
               </router-link>
             </a-col>
+            <a-col :span="6">
+              <router-link :to="{ name: 'docs-it-sys-titan-monitor' }">
+                <img src="@/components/Docs/it/sys/titan/monitor/cover.svg" alt="" class="cover">
+              </router-link>
+            </a-col>
           </a-tab-pane>
 
         </a-tabs>
